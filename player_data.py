@@ -24,20 +24,18 @@ def get_api_key():
 
 def fetch_player(search_term):
     """Fetch player profile data and return as DataFrame."""
-    headers = {
-        "Authorization": f"Bearer {get_api_key()}",
-        "Accept": "application/json"
-    }
+    headers = {"Authorization": f"Bearer {get_api_key()}","Accept": "application/json"}
     params = {"searchTerm": search_term}
     resp = requests.get(f"{BASE_URL}/player/search", headers=headers, params=params)
     resp.raise_for_status()
-    df = pd.DataFrame(resp.json())
-    # Drop columns we never need
+    df = pd.DataFrame(resp.json())    
     df = df.drop(columns=["firstName", "lastName", "player"], errors="ignore")
+    # keep only the last row (most recent player)
+    df = df.tail(1)
     return df
 
-def fetch_season_stats(team, year=API_YEAR):
-    """Fetch and pivot season stats for a team."""
+def fetch_season_stats(team,player_id, year=API_YEAR):
+    """Fetch and pivot season stats for a single player."""
     headers = {"Authorization": f"Bearer {get_api_key()}", "Accept": "application/json"}
     params = {"year": year, "team": team}
     resp = requests.get(f"{BASE_URL}/stats/player/season", headers=headers, params=params)
@@ -52,7 +50,9 @@ def fetch_season_stats(team, year=API_YEAR):
         aggfunc="first"
     )
     pivot.columns = [f"{cat.lower()}_{stype.lower()}" for cat, stype in pivot.columns]
-    pivot = pivot.reset_index().rename(columns={"playerId": "id"})
+    pivot = pivot.reset_index().rename(columns={"playerId": "id"})    
+    # filter to only the requested player
+    pivot = pivot[pivot['id'] == player_id]
     return pivot
 
 def fetch_usage(player_id, year=API_YEAR):
@@ -64,6 +64,7 @@ def fetch_usage(player_id, year=API_YEAR):
     df = pd.json_normalize(resp.json())
     # Remove metadata columns
     df = df.drop(columns=["season", "name", "position", "team", "conference"], errors="ignore")
+    print("usage ", df.shape)
     return df
 
 def fetch_ppa(player_id, year=API_YEAR):
@@ -125,7 +126,7 @@ def main():
     row = profile_df.iloc[-1]
     team, player_id = row["team"], row["id"]
 
-    stats_df = fetch_season_stats(team)
+    stats_df = fetch_season_stats(team, player_id)
     usage_df = fetch_usage(player_id)
     ppa_df = fetch_ppa(player_id)
 
