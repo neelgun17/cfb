@@ -78,6 +78,33 @@ def fetch_ppa(player_id, year=API_YEAR):
     df = df.drop(columns=["season", "name", "position", "team", "conference"], errors="ignore")
     return df
 
+def fetch_team(team, year = API_YEAR):
+    """Fetch team profile data and return as DataFrame."""
+    headers = {"Authorization": f"Bearer {get_api_key()}", "Accept": "application/json"}
+    params = {"year": year, "team": team}
+    resp = requests.get(f"{BASE_URL}/stats/season", headers=headers, params=params)
+    resp.raise_for_status()
+    df = pd.json_normalize(resp.json(), sep='.')
+    print("DF ", df.shape)
+    print("DF ", df.head())
+    return df
+
+def fetch_team_usage(team, year=API_YEAR):
+    """Fetch team play-type splits for usage normalization."""
+    headers = {"Authorization": f"Bearer {get_api_key()}", "Accept": "application/json"}
+    params = {"year": year}
+    resp = requests.get(f"{BASE_URL}/stats/season/advanced", headers=headers, params=params)
+    resp.raise_for_status()
+    df = pd.json_normalize(resp.json(), sep='.')
+    team_row = df[df["team"] == team].iloc[0]
+    return {
+        "team_std_down_rate":     team_row["offense.standardDowns.rate"],
+        "team_pass_down_rate":    team_row["offense.passingDowns.rate"],
+        "team_rushing_play_rate": team_row["offense.rushingPlays.rate"],
+        "team_passing_play_rate": team_row["offense.passingPlays.rate"],
+        "team_offense_plays": team_row["offense.plays"]
+    }
+
 def merge_data(profile_df, stats_df, usage_df, ppa_df):
     """Merge all DataFrames into one."""
     merged = (
@@ -113,14 +140,15 @@ def select_and_order(merged):
         "averagePPA.secondDown", "averagePPA.thirdDown", "averagePPA.standardDowns",
         "averagePPA.passingDowns"
     ]
-    desired_cols = metadata_cols + stat_cols + usage_cols + avg_ppa_cols
+    extra_cols = ["pct_team_pass_snaps", "pct_team_run_snaps", "share_team_pass_snaps"]
+    desired_cols = metadata_cols + stat_cols + usage_cols + avg_ppa_cols + extra_cols
 
     df = merged[desired_cols].tail(1).copy()
     return df
 
 def main():
     # Example usage
-    search_term = "Nico Iamaleava"
+    search_term = "Jalen Milroe"
     profile_df = fetch_player(search_term)
     # Use the most recent entry
     row = profile_df.iloc[-1]
@@ -129,8 +157,20 @@ def main():
     stats_df = fetch_season_stats(team, player_id)
     usage_df = fetch_usage(player_id)
     ppa_df = fetch_ppa(player_id)
+    # team_stats = fetch_team(team)
+    team_usage = fetch_team_usage(team)
 
     merged = merge_data(profile_df, stats_df, usage_df, ppa_df)
+
+    # Compute normalized usage ratios
+    merged["pct_team_pass_snaps"] = merged["usage.pass"] / team_usage["team_passing_play_rate"]
+    merged["pct_team_run_snaps"]  = merged["usage.rush"] / team_usage["team_rushing_play_rate"]
+
+    # Compute share of team pass snaps
+    player_pass_snaps = merged["countablePlays"] * merged["usage.pass"]
+    team_pass_snaps   = team_usage["team_offense_plays"] * team_usage["team_passing_play_rate"]
+    merged["share_team_pass_snaps"] = player_pass_snaps / team_pass_snaps
+
     final_df = select_and_order(merged)
 
     # Print as pretty JSON
