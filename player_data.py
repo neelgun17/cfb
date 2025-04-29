@@ -3,6 +3,8 @@ import configparser
 import requests
 import pandas as pd
 import json
+import numpy as np
+import argparse
 
 # Constants
 API_YEAR = 2024
@@ -22,15 +24,18 @@ def get_api_key():
         key = input("Enter your CollegeFootballData API key: ").strip()
     return key
 
-def fetch_player(search_term):
+def fetch_player(search_term, year=API_YEAR):
     """Fetch player profile data and return as DataFrame."""
     headers = {"Authorization": f"Bearer {get_api_key()}","Accept": "application/json"}
-    params = {"searchTerm": search_term}
+    params = {"searchTerm": search_term, "year": year}
     resp = requests.get(f"{BASE_URL}/player/search", headers=headers, params=params)
     resp.raise_for_status()
-    df = pd.DataFrame(resp.json())    
+    df = pd.DataFrame(resp.json())
     df = df.drop(columns=["firstName", "lastName", "player"], errors="ignore")
-    # keep only the last row (most recent player)
+    # Keep only entries for the target season (if available)
+    if "season" in df.columns:
+        df = df[df["season"] == year]
+    # keep only the last row (most recent player) after season filtering
     df = df.tail(1)
     return df
 
@@ -42,6 +47,8 @@ def fetch_season_stats(team,player_id, year=API_YEAR):
     resp.raise_for_status()
     data = resp.json()
     df = pd.DataFrame(data)
+    # Ensure stat column is numeric
+    df['stat'] = pd.to_numeric(df['stat'], errors='coerce')
     # Pivot to wide format
     pivot = df.pivot_table(
         index=["playerId", "player", "team", "conference"],
@@ -53,6 +60,8 @@ def fetch_season_stats(team,player_id, year=API_YEAR):
     pivot = pivot.reset_index().rename(columns={"playerId": "id"})    
     # filter to only the requested player
     pivot = pivot[pivot['id'] == player_id]
+    # print("pivot", pivot.info())
+    # print("pivot ", pivot.head())
     return pivot
 
 def fetch_usage(player_id, year=API_YEAR):
@@ -140,41 +149,97 @@ def select_and_order(merged):
         "averagePPA.secondDown", "averagePPA.thirdDown", "averagePPA.standardDowns",
         "averagePPA.passingDowns"
     ]
-    extra_cols = ["pct_team_pass_snaps", "pct_team_run_snaps", "share_team_pass_snaps"]
+    extra_cols = ["pct_team_pass_snaps", "pct_team_run_snaps", "share_team_pass_snaps", "qb_profile"]
     desired_cols = metadata_cols + stat_cols + usage_cols + avg_ppa_cols + extra_cols
 
     df = merged[desired_cols].tail(1).copy()
     return df
 
-def main():
-    # Example usage
-    search_term = "Jalen Milroe"
-    profile_df = fetch_player(search_term)
-    # Use the most recent entry
-    row = profile_df.iloc[-1]
-    team, player_id = row["team"], row["id"]
+def assign_profile(row):
+    if row["is_dual"]:
+        return "Dual Threat"
+    if row["is_gunslinger"]:
+        return "Gunslinger"
+    if row["is_pocket"]:
+        return "Pocket Passer"
+    return "Game Manager"
 
-    stats_df = fetch_season_stats(team, player_id)
-    usage_df = fetch_usage(player_id)
-    ppa_df = fetch_ppa(player_id)
-    # team_stats = fetch_team(team)
-    team_usage = fetch_team_usage(team)
-
-    merged = merge_data(profile_df, stats_df, usage_df, ppa_df)
-
-    # Compute normalized usage ratios
+def enrich_player_metrics(merged, team_usage):
+    """
+    Given a merged DataFrame for a player-season and the team's usage dict,
+    compute normalized usage ratios, share metrics, prototype flags, and profile.
+    """
+    # normalized usage ratios
     merged["pct_team_pass_snaps"] = merged["usage.pass"] / team_usage["team_passing_play_rate"]
     merged["pct_team_run_snaps"]  = merged["usage.rush"] / team_usage["team_rushing_play_rate"]
-
-    # Compute share of team pass snaps
+    # share of team pass snaps
     player_pass_snaps = merged["countablePlays"] * merged["usage.pass"]
     team_pass_snaps   = team_usage["team_offense_plays"] * team_usage["team_passing_play_rate"]
     merged["share_team_pass_snaps"] = player_pass_snaps / team_pass_snaps
+    # prototype flags
+    merged["is_dual"] = (merged["usage.rush"] >= 0.15) & (merged["averagePPA.rush"] >= 0.15)
+    merged["is_pocket"] = (merged["usage.rush"] <= 0.05) & (merged["passing_pct"] >= 0.65)
+    merged["is_gunslinger"] = (
+        (merged["averagePPA.pass"] >= 0.20) &
+        ((merged["passing_int"] / merged["passing_att"]) >= 0.03)
+    )
+    # assign profile string
+    merged["qb_profile"] = merged.apply(assign_profile, axis=1)
+    return merged
 
+def main():
+    search_term = "Cameron Ward"
+    profile_df = fetch_player(search_term)
+    if profile_df.empty:
+        raise ValueError(f"No player found matching '{search_term}'")
+    row = profile_df.iloc[-1]
+    team, player_id = row["team"], row["id"]
+
+    # 2) Fetch everything
+    stats_df  = fetch_season_stats(team, player_id)
+    usage_df  = fetch_usage(player_id)
+    ppa_df    = fetch_ppa(player_id)
+    team_usage= fetch_team_usage(team)
+
+    # 3) Merge into one DF
+    merged = merge_data(profile_df, stats_df, usage_df, ppa_df)
+
+    # 4) Compute your two metrics
+    merged = enrich_player_metrics(merged, team_usage)
+
+    # 5) Select & print just that one QB’s profile
     final_df = select_and_order(merged)
-
-    # Print as pretty JSON
-    print(json.dumps(final_df.iloc[0].to_dict(), indent=2))
+    profile_json = final_df.iloc[0].to_dict()
+    print(json.dumps(profile_json, indent=2))
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--top50", action="store_true", help="Process top 50 QBs and save to CSV")
+    args = parser.parse_args()
+    if args.top50:
+        records = []
+        qb_names = pd.read_csv("qb_names.csv", header=None)[0].to_list()
+        for qb in qb_names:
+            profile_df = fetch_player(qb)
+            if profile_df.empty: 
+                continue
+            # Extract scalar values from the single-row DataFrame
+            row = profile_df.iloc[0]
+            name = row["name"]
+            pid = row["id"]
+            team = row["team"]
+            # fetch and merge as before using pid and team
+            # inline existing logic to compute merged, metrics, and assign profile
+            stats_df = fetch_season_stats(team, pid)
+            usage_df = fetch_usage(pid)
+            ppa_df = fetch_ppa(pid)
+            team_usage = fetch_team_usage(team)
+            merged = merge_data(profile_df, stats_df, usage_df, ppa_df)
+            merged = enrich_player_metrics(merged, team_usage)
+            final_df = select_and_order(merged)
+            records.append(final_df.iloc[0].to_dict())
+        out_df = pd.DataFrame(records)
+        out_df.to_csv("top50_qb_profiles.csv", index=False)
+        print("Saved top 50 QB profiles to top50_qb_profiles.csv")
+    else:
+        main()
