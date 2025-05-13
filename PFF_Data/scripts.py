@@ -619,6 +619,10 @@ def reduce_columns(df):
     output_path = os.path.join(base_dir, "qb_player_merged_summary.csv")
      # --- Insert adjusted_attempt_rate calculation here ---
     try:
+        df["designed_runs"]  = round((df["attempts_rushing"] - df["scrambles"]),2)
+    except Exception as e:
+        print(f"  Error computing 'adjusted_attempt_rate': {e}")
+    try:
         df["designed_run_rate"] = round((df["attempts_rushing"] - df["scrambles"]) / (df["dropbacks"] + df["attempts_rushing"] - df["scrambles"]), 2)
     except Exception as e:
         print(f"  Error computing 'adjusted_attempt_rate': {e}")
