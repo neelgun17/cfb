@@ -243,16 +243,16 @@ def extract_player_rushing():
                         kept_values_row.append('')
                 processed_rows.append(kept_values_row)
             # Rename column in final_header and update the first row of processed_rows
-            def rename(name):
+            def rename(name, end):
                 if name in final_header:
                     col_index = final_header.index(name)
-                    final_header[col_index] = name +"_rushing"
-                    processed_rows[0][col_index] = name+ "_rushing"
-            rename("attempts")
-            rename("touchdowns")
-            rename("yards")
-            rename("ypa")
-            rename("first_downs")
+                    final_header[col_index] = name +"_" + end
+                    processed_rows[0][col_index] = name+ "_" + end
+            rename("attempts", "designed_rushing")
+            rename("touchdowns","rushing")
+            rename("yards", "rushing")
+            rename("ypa","rushing")
+            rename("first_downs","rushing")
             print()
             print(f"  Final output header rushing: {final_header}")
             print(len(final_header))
@@ -619,11 +619,15 @@ def reduce_columns(df):
     output_path = os.path.join(base_dir, "qb_player_merged_summary.csv")
      # --- Insert adjusted_attempt_rate calculation here ---
     try:
-        df["designed_runs"]  = round((df["attempts_rushing"] - df["scrambles"]),2)
+        df["tot_attempts"] = round((df["attempts"]) + (df["attempts_designed_rushing"]), 2)
+    except Exception as e:
+        print(f"  Error computing 'tot_attempts': {e}")
+    try:
+        df["tot_rushing_attempts"]  = round((df["attempts_designed_rushing"] + df["scrambles"]),2)
     except Exception as e:
         print(f"  Error computing 'adjusted_attempt_rate': {e}")
     try:
-        df["designed_run_rate"] = round((df["attempts_rushing"] - df["scrambles"]) / (df["dropbacks"] + df["attempts_rushing"] - df["scrambles"]), 2)
+        df["designed_run_rate"] = round((df["attempts_designed_rushing"]) / (df["tot_attempts"]), 2)
     except Exception as e:
         print(f"  Error computing 'adjusted_attempt_rate': {e}")
     try:
@@ -671,11 +675,7 @@ def reduce_columns(df):
     except Exception as e:
         print(f"  Error computing 'long_throw_rate': {e}")        
     try:
-        df["tot_attempts"] = round((df["attempts"]) + (df["attempts_rushing"]), 2)
-    except Exception as e:
-        print(f"  Error computing 'tot_attempts': {e}")
-    try:
-        df["designed_YPA"] = round((df["designed_yards"]) / (df["attempts_rushing"] - df["scrambles"]), 2)
+        df["designed_YPA"] = round((df["designed_yards"]) / (df["attempts_designed_rushing"]), 2)
     except Exception as e:
         print(f"  Error computing 'designed_YPA': {e}")          
     try:
@@ -683,19 +683,19 @@ def reduce_columns(df):
     except Exception as e:
         print(f"  Error computing 'pct_total_yards_rushing': {e}")   
     try:
-        df["qb_designed_run_rate_of_all_plays"] = round((df["attempts_rushing"] - df["scrambles"]) / (df["tot_attempts"]), 2)
+        df["qb_designed_run_rate_of_all_plays"] = round((df["attempts_designed_rushing"]) / (df["tot_attempts"]), 2)
     except Exception as e:
         print(f"  Error computing 'qb_designed_run_rate_of_all_plays': {e}")   
     try:
-        df["rush_attempts_per_game"] = round((df["attempts_rushing"]) / (df["player_game_count"]), 2)
+        df["rush_attempts_per_game"] = round((df["tot_rushing_attempts"]) / (df["player_game_count"]), 2)
     except Exception as e:
         print(f"  Error computing 'rush_attempts_per_game': {e}")     
     try:
-        df["YAC_per_rush_attempt"] = round((df["yards_after_contact"]) / (df["attempts_rushing"]), 2)
+        df["YAC_per_rush_attempt"] = round((df["yards_after_contact"]) / (df["tot_rushing_attempts"]), 2)
     except Exception as e:
         print(f"  Error computing 'YAC_per_rush_attempt': {e}")    
     try:
-        df["qb_rush_attempt_rate"] = round((df["attempts_rushing"]) / (df["dropbacks"]) / ((df["attempts_rushing"] - df["scrambles"])), 2)
+        df["qb_rush_attempt_rate"] = round((df["tot_rushing_attempts"]) / (df["dropbacks"] + (df["tot_rushing_attempts"])), 2)
     except Exception as e:
         print(f"  Error computing 'qb_rush_attempt_rate': {e}")                     
     # Drop the original columns after calculation
