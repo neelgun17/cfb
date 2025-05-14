@@ -40,6 +40,7 @@ else:
 # cluster_data_imputed_df = df_filtered[features_for_clustering].copy() 
 # # (Then impute NaNs in cluster_data_imputed_df)
 # Assume features_for_clustering is a list of column names decided earlier
+
 features_for_clustering = [
     # --- Overall Passing Style/Efficiency (Core) ---
     'accuracy_percent',         # Overall accuracy
@@ -141,6 +142,9 @@ cluster_data_scaled_df = pd.DataFrame(cluster_data_scaled, columns=features_for_
 print("Features successfully scaled.")
 print(f"Scaled data shape: {cluster_data_scaled_df.shape}")
 
+output_filename = "/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/analysis/cluster_data_scaled_df.csv"
+cluster_data_scaled_df.to_csv(output_filename, index=False)
+print(f"Scaled data saved to: {output_filename}")
 
 # a) Handle Infinite Values (if any, from division by zero in calculated rates)
 if np.isinf(cluster_data.values).any():
@@ -248,6 +252,7 @@ identifiers['cluster'] = cluster_labels
 
 # Add cluster labels back to the scaled data for analysis (optional but useful)
 cluster_data_scaled_df['cluster'] = cluster_labels
+
 # Add cluster labels back to the imputed (but not scaled) data for interpretation
 cluster_data_imputed_df['cluster'] = cluster_labels
 
@@ -415,9 +420,6 @@ else:
 
 
 # 4. Save the updated DataFrame (Optional but Recommended)
-output_filename = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/qb_data_with_archetypes_k4.csv'
-df_filtered.to_csv(output_filename, index=False)
-print(f"\nDataFrame with archetypes saved to {output_filename}")
 # --- ASSUME YOUR DATA IS LOADED AND PREPARED ---
 # df_filtered: DataFrame with original player info and stats (filtered by dropbacks)
 # cluster_data_scaled_df: DataFrame with scaled features for clustering
@@ -463,8 +465,6 @@ if 'hierarchical_cluster_k4' in df_filtered_hierarchical_k4.columns:
 else:
     print("Error: 'hierarchical_cluster_k4' column not found for mapping to names.")
 # --- END OF ADDING NAMED ARCHETYPES ---
-
-
 # --- c) Generate Full Mean Statistical Profiles (FOR ME TO ANALYZE) ---
 
 # Add the k4 hierarchical cluster labels to the imputed (but not scaled) data
@@ -491,6 +491,61 @@ player_list_cols_present = [col for col in player_list_cols if col in df_filtere
 df_player_assignments_k4 = df_filtered_hierarchical_k4[player_list_cols_present].sort_values(by=['hierarchical_cluster_k4', 'dropbacks'], ascending=[True, False])
 df_player_assignments_k4.to_csv(output_player_lists_csv, index=False)
 print(f"\nPlayer assignments with k=4 hierarchical clustering (and names) saved to: {output_player_lists_csv}")
+
+
+try:
+    df_all_players = pd.read_csv('/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/processed_data/qb_player_merged_summary.csv')
+    print(f"Loaded df_all_players with shape: {df_all_players.shape}")
+except FileNotFoundError:
+    print("Error: Main player stats CSV not found. Please update the path.")
+    exit()
+df_labels_to_merge = df_player_assignments_k4[['player_id', 'hierarchical_cluster_k4']].copy()
+
+df_all_players_with_archetypes = df_all_players.copy()
+
+# Ensure 'player_id' exists in df_all_players_with_archetypes
+if 'player_id' not in df_all_players_with_archetypes.columns:
+    print("Error: 'player_id' column not found in the main player stats DataFrame (df_all_players). Cannot merge.")
+    exit()
+
+# Perform the merge
+df_all_players_with_archetypes = pd.merge(
+    df_all_players_with_archetypes,
+    df_labels_to_merge,
+    on='player_id',  # The common column to merge on
+    how='left'       # Keep all rows from df_all_players_with_archetypes
+)
+print(f"\nShape after merging cluster numbers: {df_all_players_with_archetypes.shape}")
+print(f"Number of players with assigned cluster numbers (non-NaN): {df_all_players_with_archetypes['hierarchical_cluster_k4'].notna().sum()}")
+print(f"Number of players without assigned cluster numbers (NaN): {df_all_players_with_archetypes['hierarchical_cluster_k4'].isna().sum()}")
+
+
+# --- 4. Map Numeric Cluster Labels to Archetype Names ---
+# The .map() function will correctly handle NaN values in 'hierarchical_cluster_k4'
+# (they will remain NaN in the 'archetype_name' column).
+# df_all_players_with_archetypes['archetype_name'] = df_all_players_with_archetypes['hierarchical_cluster_k4'].map(archetype_map_hierarchical_k4)
+df_all_players_with_archetypes.insert(2,"archetype_name",df_all_players_with_archetypes['hierarchical_cluster_k4'].map(archetype_map_hierarchical_k4))
+print("\nSuccessfully created the 'archetype_name' column.")
+
+# --- 5. Verify Results ---
+print("\nFirst few rows with the new 'archetype_name' column:")
+# Display relevant columns for verification
+cols_to_show = ['player', 'player_id', 'team_name', 'hierarchical_cluster_k4', 'archetype_name']
+# Filter to columns that actually exist to prevent KeyErrors
+cols_to_show = [col for col in cols_to_show if col in df_all_players_with_archetypes.columns]
+print(df_all_players_with_archetypes[cols_to_show].head())
+
+print("\nDistribution of players across NAMED archetypes (including those not clustered):")
+print(df_all_players_with_archetypes['archetype_name'].value_counts(dropna=False)) # dropna=False shows count of NaNs
+
+# --- 6. Save the New DataFrame to a CSV ---
+output_path_all_players = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/analysis/merged_summary_with_archetypes.csv' # IMPORTANT: Change this path
+try:
+    df_all_players_with_archetypes.to_csv(output_path_all_players, index=False)
+    print(f"\nDataFrame with all players and archetypes saved to: {output_path_all_players}")
+except Exception as e:
+    print(f"Error saving CSV: {e}")
+
 
 # --- ASSUME THESE ARE ALREADY DEFINED AND CORRECT ---
 # cluster_data_imputed_df: DF with original (imputed, unscaled) features used for clustering.
