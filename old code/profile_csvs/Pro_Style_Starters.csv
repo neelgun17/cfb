@@ -1,0 +1,19 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+4832918,Ethan Vasko,Coastal Carolina,Sun Belt,Pro-Style Starters,4,271,0.546,2120.0,14.0,107.0,447.0,5.0,4.2,0.7978,0.2309,0.57,0.699,0.451,0.444,0.47,0.515
+4795295,Katin Houser,East Carolina,American Athletic,Pro-Style Starters,4,245,0.608,2006.0,18.0,49.0,170.0,4.0,3.5,0.5415,0.1077,0.372,0.412,0.636,0.657,0.537,0.801
+4428993,Haynes King,Georgia Tech,ACC,Pro-Style Starters,4,269,0.729,2114.0,14.0,126.0,577.0,11.0,4.6,0.6923,0.2866,0.565,0.571,0.488,0.578,0.298,0.717
+4596472,Jalon Daniels,Kansas,Big 12,Pro-Style Starters,4,300,0.57,2454.0,14.0,93.0,447.0,6.0,4.8,1.0164,0.2148,0.674,0.646,0.522,0.512,0.555,0.515
+4432803,Kaidon Salter,Liberty,Conference USA,Pro-Style Starters,4,261,0.563,1886.0,15.0,114.0,587.0,7.0,5.1,0.9568,0.2175,0.656,0.712,0.396,0.407,0.368,0.611
+4373895,Ben Wooldridge,Louisiana,Sun Belt,Pro-Style Starters,4,291,0.66,2453.0,17.0,65.0,174.0,5.0,2.7,0.7488,0.1217,0.484,0.515,0.559,0.508,0.85,0.648
+4600403,Braylon Braxton,Marshall,Sun Belt,Pro-Style Starters,4,206,0.602,1624.0,19.0,134.0,610.0,4.0,4.6,0.6867,0.2632,0.535,0.553,0.442,0.55,0.246,0.676
+4426430,Taisun Phommachanh,Massachusetts,FBS Independents,Pro-Style Starters,4,234,0.564,1590.0,8.0,107.0,317.0,3.0,3.0,0.7188,0.1897,0.569,0.535,0.363,0.34,0.428,0.428
+4429435,Brady Cook,Missouri,SEC,Pro-Style Starters,4,320,0.625,2525.0,11.0,87.0,223.0,5.0,2.6,0.8186,0.1487,0.637,0.625,0.404,0.399,0.426,0.584
+4618083,Ethan Hampton,Northern Illinois,Mid-American,Pro-Style Starters,4,245,0.584,1608.0,12.0,53.0,129.0,2.0,2.4,0.6703,0.0784,0.413,0.447,0.436,0.419,0.534,0.55
+5125715,Colton Joseph,Old Dominion,Sun Belt,Pro-Style Starters,4,222,0.599,1623.0,11.0,114.0,647.0,11.0,5.7,0.6886,0.2652,0.561,0.523,0.483,0.465,0.522,0.644
+4870819,Eli Holstein,Pittsburgh,ACC,Pro-Style Starters,4,290,0.617,2225.0,17.0,81.0,328.0,3.0,4.0,0.5974,0.1769,0.51,0.446,0.43,0.426,0.447,0.71
+4920227,Giovanni Lopez,South Alabama,Sun Belt,Pro-Style Starters,4,311,0.659,2557.0,18.0,82.0,465.0,7.0,5.7,0.8223,0.1756,0.64,0.593,0.557,0.487,0.863,0.793
+4870971,Marcel Reed,Texas A&M,SEC,Pro-Style Starters,4,240,0.613,1864.0,15.0,116.0,547.0,7.0,4.7,0.6848,0.2124,0.46,0.506,0.416,0.377,0.508,0.576
+4877717,Matthew Caldwell,Troy,Sun Belt,Pro-Style Starters,4,224,0.629,1608.0,13.0,48.0,47.0,5.0,1.0,0.6952,0.1189,0.462,0.513,0.459,0.488,0.314,0.523
+4571364,Hajj-Malik Williams,UNLV,Mountain West,Pro-Style Starters,4,252,0.595,1941.0,19.0,161.0,851.0,9.0,5.3,0.8772,0.2474,0.607,0.594,0.458,0.39,0.594,0.48
+4678010,Kyron Drones,Virginia Tech,ACC,Pro-Style Starters,4,224,0.607,1562.0,10.0,98.0,337.0,6.0,3.4,0.6741,0.2102,0.471,0.557,0.371,0.39,0.324,0.434
+4429847,Garrett Greene,West Virginia,Big 12,Pro-Style Starters,4,316,0.598,2300.0,15.0,133.0,751.0,6.0,5.6,0.8804,0.2485,0.647,0.627,0.436,0.391,0.562,0.627

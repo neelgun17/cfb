@@ -1,0 +1,23 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+4432759,Sawyer Robertson,Baylor,Big 12,Balanced Dual-Threat,0,368,0.622,3071.0,28.0,63.0,230.0,4.0,3.7,0.9415,0.1137,0.616,0.556,0.568,0.572,0.542,0.748
+4870513,Maddux Madsen,Boise State,Mountain West,Balanced Dual-Threat,0,396,0.624,3018.0,23.0,57.0,221.0,5.0,3.9,1.0047,0.0948,0.712,0.709,0.572,0.541,0.832,0.504
+4685413,Cade Klubnik,Clemson,ACC,Balanced Dual-Threat,0,486,0.634,3639.0,36.0,119.0,462.0,7.0,3.9,0.9292,0.236,0.72,0.747,0.443,0.439,0.463,0.829
+4432762,Shedeur Sanders,Colorado,Big 12,Balanced Dual-Threat,0,477,0.74,4134.0,37.0,100.0,-50.0,4.0,-0.5,1.0589,0.2267,0.919,0.865,0.523,0.538,0.405,0.679
+4430841,Carson Beck,Georgia,SEC,Balanced Dual-Threat,0,448,0.647,3485.0,28.0,55.0,71.0,1.0,1.3,0.895,0.1167,0.652,0.683,0.443,0.488,0.013,0.618
+4430431,Kurtis Rourke,Indiana,Big Ten,Balanced Dual-Threat,0,320,0.694,3042.0,29.0,46.0,-35.0,2.0,-0.8,0.971,0.0707,0.615,0.634,0.669,0.73,-0.007,0.791
+4567747,Garrett Nussmeier,LSU,SEC,Balanced Dual-Threat,0,524,0.641,4039.0,29.0,36.0,-39.0,3.0,-1.1,1.0385,0.075,0.738,0.823,0.482,0.467,0.778,0.585
+4360689,Tyler Shough,Louisville,ACC,Balanced Dual-Threat,0,389,0.627,3195.0,23.0,42.0,19.0,1.0,0.5,0.9654,0.0743,0.739,0.727,0.54,0.559,0.276,0.809
+4606194,Seth Henigan,Memphis,American Athletic,Balanced Dual-Threat,0,477,0.648,3502.0,25.0,80.0,190.0,1.0,2.4,1.0486,0.1479,0.804,0.792,0.449,0.465,0.31,0.628
+4688380,Cameron Ward,Miami,ACC,Balanced Dual-Threat,0,454,0.672,4313.0,39.0,60.0,204.0,4.0,3.4,1.0,0.1014,0.809,0.75,0.722,0.69,1.108,1.039
+4692530,Chandler Morris,North Texas,American Athletic,Balanced Dual-Threat,0,509,0.633,3774.0,31.0,60.0,242.0,4.0,4.0,0.9279,0.1532,0.723,0.68,0.483,0.481,0.503,0.49
+4429955,Will Howard,Ohio State,Big Ten,Balanced Dual-Threat,0,423,0.73,4010.0,35.0,105.0,226.0,7.0,2.2,0.9872,0.1977,0.685,0.766,0.691,0.755,0.468,0.809
+4689114,Jaxson Dart,Ole Miss,SEC,Balanced Dual-Threat,0,398,0.693,4279.0,29.0,124.0,495.0,3.0,4.0,0.9825,0.2208,0.745,0.651,0.7,0.77,0.396,1.016
+4427238,Dillon Gabriel,Oregon,Big Ten,Balanced Dual-Threat,0,447,0.729,3857.0,30.0,75.0,149.0,7.0,2.0,1.0063,0.1432,0.796,0.836,0.606,0.627,0.458,1.058
+4714771,Drew Allar,Penn State,Big Ten,Balanced Dual-Threat,0,394,0.665,3327.0,24.0,96.0,302.0,6.0,3.1,0.9559,0.1448,0.662,0.653,0.52,0.524,0.498,0.637
+5084084,Kevin Jennings,SMU,ACC,Balanced Dual-Threat,0,381,0.651,3189.0,23.0,101.0,354.0,5.0,3.5,0.9154,0.1871,0.726,0.736,0.539,0.604,0.26,0.827
+4433971,Kyle McCord,Syracuse,ACC,Balanced Dual-Threat,0,592,0.66,4779.0,34.0,67.0,-65.0,3.0,-1.0,1.0339,0.1375,0.879,0.932,0.512,0.512,0.513,0.569
+4685401,Josh Hoover,TCU,Big 12,Balanced Dual-Threat,0,471,0.665,3949.0,27.0,47.0,-19.0,4.0,-0.4,1.0286,0.1016,0.756,0.782,0.56,0.59,0.178,0.59
+4889929,Quinn Ewers,Texas,SEC,Balanced Dual-Threat,0,445,0.658,3472.0,31.0,57.0,-82.0,2.0,-1.4,0.8765,0.0547,0.64,0.636,0.475,0.468,0.578,0.757
+4360890,Jordan McCloud,Texas State,Sun Belt,Balanced Dual-Threat,0,389,0.699,3222.0,30.0,74.0,278.0,7.0,3.8,0.965,0.1364,0.609,0.645,0.56,0.584,0.554,0.542
+4431465,Behren Morton,Texas Tech,Big 12,Balanced Dual-Threat,0,463,0.633,3300.0,27.0,55.0,-22.0,1.0,-0.4,0.9139,0.0796,0.692,0.68,0.426,0.442,0.198,0.535
+5121169,Darian Mensah,Tulane,American Athletic,Balanced Dual-Threat,0,287,0.659,2723.0,22.0,60.0,132.0,1.0,2.2,0.926,0.0891,0.553,0.564,0.667,0.702,0.445,0.843
