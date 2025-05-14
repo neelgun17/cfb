@@ -1,0 +1,23 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+5151904,John Busha,Air Force,Mountain West,Run-Heavy Option,1,79,0.367,415.0,1.0,78.0,172.0,1.0,2.2,0.5753,0.1131,0.303,0.251,-0.006,-0.146,0.154,-0.096
+4567707,Grayson James,Boston College,ACC,Run-Heavy Option,1,166,0.639,1202.0,6.0,37.0,79.0,3.0,2.1,0.5153,0.0641,0.412,0.379,0.373,0.351,0.496,0.584
+4683291,Joey Labas,Central Michigan,Mid-American,Run-Heavy Option,1,160,0.588,1114.0,7.0,21.0,19.0,0.0,0.9,0.5418,0.0386,0.327,0.348,0.222,0.215,0.3,0.2
+4700135,Cam Fancher,Florida Atlantic,American Athletic,Run-Heavy Option,1,212,0.594,1528.0,6.0,99.0,365.0,3.0,3.7,0.6432,0.1848,0.524,0.526,0.282,0.23,0.507,0.514
+4429020,D.J. Uiagalelei,Florida State,ACC,Run-Heavy Option,1,156,0.538,1065.0,4.0,37.0,-8.0,0.0,-0.2,0.43,0.0795,0.313,0.35,0.196,0.204,0.142,0.601
+4690977,Donovan Smith,Houston,Big 12,Run-Heavy Option,1,133,0.654,867.0,4.0,66.0,159.0,3.0,2.4,0.4901,0.1421,0.327,0.346,0.174,0.083,0.41,-0.005
+4427455,Cade McNamara,Iowa,Big Ten,Run-Heavy Option,1,172,0.605,1017.0,6.0,13.0,-31.0,0.0,-2.4,0.6828,0.0125,0.448,0.421,0.214,0.236,0.3,0.191
+5083103,Davis Bryson,Kennesaw State,Conference USA,Run-Heavy Option,1,261,0.548,1494.0,6.0,112.0,293.0,4.0,2.6,0.8885,0.2453,0.64,0.621,0.088,0.052,0.18,0.341
+4432782,Brock Vandagriff,Kentucky,SEC,Run-Heavy Option,1,218,0.573,1593.0,10.0,90.0,131.0,0.0,1.5,0.7278,0.1872,0.578,0.596,0.259,0.328,0.036,0.219
+5220783,Parker Awad,New Mexico State,Conference USA,Run-Heavy Option,1,159,0.465,1079.0,7.0,60.0,109.0,1.0,1.8,1.1419,0.2,0.835,0.819,0.241,0.224,0.309,0.384
+4911961,Jack Lausch,Northwestern,Big Ten,Run-Heavy Option,1,296,0.537,1714.0,7.0,87.0,213.0,2.0,2.4,0.7653,0.2152,0.617,0.614,0.123,0.073,0.343,0.326
+4870607,Jackson Arnold,Oklahoma,SEC,Run-Heavy Option,1,246,0.626,1421.0,12.0,150.0,444.0,3.0,3.0,0.7195,0.2548,0.582,0.59,0.204,0.142,0.357,0.322
+4887446,Gevani McCoy,Oregon State,Pac-12,Run-Heavy Option,1,202,0.609,1300.0,3.0,59.0,328.0,5.0,5.6,0.5714,0.1062,0.424,0.402,0.283,0.115,1.055,0.355
+4806463,Bryce Archie,South Florida,American Athletic,Run-Heavy Option,1,290,0.593,1914.0,9.0,68.0,137.0,2.0,2.0,0.6724,0.1196,0.465,0.5,0.204,0.207,0.182,0.045
+4433886,Tate Rodemaker,Southern Miss,Sun Belt,Run-Heavy Option,1,165,0.594,985.0,7.0,26.0,-90.0,0.0,-3.5,0.5142,0.0437,0.369,0.336,0.061,0.136,-0.787,0.428
+4838679,Ashton Daniels,Stanford,ACC,Run-Heavy Option,1,271,0.627,1700.0,10.0,148.0,669.0,3.0,4.5,0.6443,0.3516,0.592,0.565,0.204,0.138,0.325,0.407
+5151618,Kirk Francis,Tulsa,American Athletic,Run-Heavy Option,1,253,0.589,1585.0,9.0,34.0,-18.0,0.0,-0.5,0.5753,0.0651,0.416,0.379,0.185,0.22,-0.139,0.145
+4920156,Dylan Rizk,UCF,Big 12,Run-Heavy Option,1,118,0.619,915.0,5.0,29.0,43.0,0.0,1.5,0.3735,0.0435,0.279,0.245,0.261,0.331,-0.153,0.161
+5122054,Aidan Armenta,UL Monroe,Sun Belt,Run-Heavy Option,1,188,0.543,1294.0,9.0,47.0,57.0,1.0,1.2,0.8,0.0741,0.475,0.539,0.295,0.295,0.293,0.284
+5083042,Skyler Locklear,UTEP,Conference USA,Run-Heavy Option,1,236,0.631,1591.0,10.0,80.0,237.0,2.0,3.0,0.6606,0.1785,0.478,0.528,0.296,0.291,0.316,0.406
+5044387,Anthony Colandrea,Virginia,ACC,Run-Heavy Option,1,320,0.619,2125.0,13.0,128.0,277.0,2.0,2.2,0.8254,0.2558,0.691,0.615,0.152,0.174,0.073,0.189
+5082633,Evan Svoboda,Wyoming,Mountain West,Run-Heavy Option,1,226,0.491,1308.0,5.0,109.0,237.0,5.0,2.2,0.6749,0.2052,0.502,0.601,0.132,0.036,0.405,0.167

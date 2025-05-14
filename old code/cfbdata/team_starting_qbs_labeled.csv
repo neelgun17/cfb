@@ -1,0 +1,133 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+5151904,John Busha,Air Force,Mountain West,Pure Game-Managers,3,79,0.367,415.0,1.0,78.0,172.0,1.0,2.2,0.5753,0.1131,0.303,0.251,-0.006,-0.146,0.154,-0.096
+4431091,Ben Finley,Akron,Mid-American,High-Volume Dual-Threat,2,387,0.545,2581.0,16.0,80.0,51.0,0.0,0.6,0.8555,0.1881,0.723,0.689,0.283,0.319,0.054,0.488
+4432734,Jalen Milroe,Alabama,SEC,Balanced Dual-Threat,0,319,0.643,2844.0,16.0,168.0,726.0,20.0,4.3,0.9523,0.367,0.85,0.866,0.549,0.466,0.724,0.716
+5151948,Joey Aguilar,App State,Sun Belt,High-Volume Dual-Threat,2,390,0.559,3002.0,23.0,58.0,217.0,2.0,3.7,0.8622,0.1132,0.657,0.657,0.446,0.445,0.447,0.696
+4801717,Noah Fifita,Arizona,Big 12,High-Volume Dual-Threat,2,430,0.605,2958.0,18.0,66.0,17.0,1.0,0.3,1.0304,0.1279,0.844,0.853,0.331,0.316,0.516,0.587
+5078810,Sam Leavitt,Arizona State,Big 12,Pro-Style Starters,4,350,0.617,2885.0,24.0,110.0,443.0,5.0,4.0,0.9665,0.1779,0.691,0.577,0.529,0.529,0.54,0.752
+4431325,Taylen Green,Arkansas,SEC,Balanced Dual-Threat,0,381,0.604,3153.0,15.0,156.0,602.0,8.0,3.9,0.9567,0.3007,0.795,0.75,0.457,0.453,0.471,0.711
+5080403,Jaylen Raynor,Arkansas State,Sun Belt,High-Volume Dual-Threat,2,420,0.617,2783.0,16.0,137.0,387.0,3.0,2.8,0.9831,0.2388,0.82,0.815,0.292,0.31,0.212,0.441
+4430590,Payton Thorne,Auburn,SEC,High-Volume Dual-Threat,2,317,0.628,2713.0,21.0,112.0,283.0,2.0,2.5,0.913,0.2387,0.714,0.671,0.485,0.547,0.24,0.555
+5150611,Jake Retzlaff,BYU,Big 12,High-Volume Dual-Threat,2,367,0.575,2896.0,19.0,100.0,417.0,6.0,4.2,1.0051,0.2154,0.67,0.675,0.387,0.389,0.382,0.532
+5091890,Kadin Semonza,Ball State,Mid-American,High-Volume Dual-Threat,2,427,0.644,2900.0,25.0,54.0,-81.0,1.0,-1.5,1.0108,0.0776,0.759,0.813,0.347,0.355,0.19,0.556
+4432759,Sawyer Robertson,Baylor,Big 12,Pro-Style Starters,4,368,0.622,3071.0,28.0,63.0,230.0,4.0,3.7,0.9415,0.1137,0.616,0.556,0.568,0.572,0.542,0.748
+4870513,Maddux Madsen,Boise State,Mountain West,Pro-Style Starters,4,396,0.624,3018.0,23.0,57.0,221.0,5.0,3.9,1.0047,0.0948,0.712,0.709,0.572,0.541,0.832,0.504
+4567707,Grayson James,Boston College,ACC,Situational Scramblers,5,166,0.639,1202.0,6.0,37.0,79.0,3.0,2.1,0.5153,0.0641,0.412,0.379,0.373,0.351,0.496,0.584
+4426444,Connor Bazelak,Bowling Green,Mid-American,High-Volume Dual-Threat,2,402,0.669,3044.0,18.0,48.0,-91.0,2.0,-1.9,0.991,0.0777,0.67,0.684,0.406,0.405,0.428,0.467
+4837248,Fernando Mendoza,California,ACC,High-Volume Dual-Threat,2,386,0.687,3004.0,16.0,87.0,105.0,2.0,1.2,0.8598,0.1409,0.638,0.691,0.425,0.418,0.53,0.498
+4683291,Joey Labas,Central Michigan,Mid-American,Pure Game-Managers,3,160,0.588,1114.0,7.0,21.0,19.0,0.0,0.9,0.5418,0.0386,0.327,0.348,0.222,0.215,0.3,0.2
+5138131,Deshawn Purdie,Charlotte,American Athletic,Situational Scramblers,5,200,0.5,1802.0,10.0,41.0,-130.0,1.0,-3.2,1.0851,0.0852,0.698,0.781,0.276,0.306,-0.124,0.188
+4899046,Brendan Sorsby,Cincinnati,Big 12,Balanced Dual-Threat,0,389,0.64,2813.0,18.0,106.0,445.0,9.0,4.2,1.022,0.2549,0.808,0.813,0.439,0.39,0.637,0.711
+4685413,Cade Klubnik,Clemson,ACC,Pro-Style Starters,4,486,0.634,3639.0,36.0,119.0,462.0,7.0,3.9,0.9292,0.236,0.72,0.747,0.443,0.439,0.463,0.829
+4832918,Ethan Vasko,Coastal Carolina,Sun Belt,Balanced Dual-Threat,0,271,0.546,2120.0,14.0,107.0,447.0,5.0,4.2,0.7978,0.2309,0.57,0.699,0.451,0.444,0.47,0.515
+4432762,Shedeur Sanders,Colorado,Big 12,Pro-Style Starters,4,477,0.74,4134.0,37.0,100.0,-50.0,4.0,-0.5,1.0589,0.2267,0.919,0.865,0.523,0.538,0.405,0.679
+4833597,Brayden Fowler-Nicolosi,Colorado State,Mountain West,High-Volume Dual-Threat,2,374,0.607,2755.0,14.0,43.0,80.0,4.0,1.9,0.9974,0.0998,0.763,0.729,0.419,0.471,-0.013,0.612
+4685497,Maalik Murphy,Duke,ACC,Situational Pocket QBs,1,421,0.603,2932.0,26.0,19.0,-79.0,2.0,-4.2,0.9383,0.0407,0.664,0.719,0.48,0.488,0.252,0.699
+4795295,Katin Houser,East Carolina,American Athletic,Pro-Style Starters,4,245,0.608,2006.0,18.0,49.0,170.0,4.0,3.5,0.5415,0.1077,0.372,0.412,0.636,0.657,0.537,0.801
+4570057,Cole Snyder,Eastern Michigan,Mid-American,High-Volume Dual-Threat,2,402,0.595,2676.0,15.0,136.0,322.0,4.0,2.4,0.9206,0.2437,0.708,0.684,0.274,0.3,0.169,0.566
+5079555,D.J. Lagway,Florida,SEC,Pure Triple-Option,6,192,0.599,1915.0,12.0,51.0,101.0,0.0,2.0,1.2022,0.1781,0.891,0.951,0.444,0.512,0.069,0.478
+4700135,Cam Fancher,Florida Atlantic,American Athletic,Situational Scramblers,5,212,0.594,1528.0,6.0,99.0,365.0,3.0,3.7,0.6432,0.1848,0.524,0.526,0.282,0.23,0.507,0.514
+5085337,Keyone Jenkins,Florida International,Conference USA,High-Volume Dual-Threat,2,304,0.618,2557.0,22.0,75.0,130.0,2.0,1.7,0.9796,0.1906,0.648,0.692,0.411,0.508,-0.034,0.493
+4429020,D.J. Uiagalelei,Florida State,ACC,Pure Game-Managers,3,156,0.538,1065.0,4.0,37.0,-8.0,0.0,-0.2,0.43,0.0795,0.313,0.35,0.196,0.204,0.142,0.601
+4597499,Mikey Keene,Fresno State,Mountain West,Situational Pocket QBs,1,392,0.704,2887.0,18.0,47.0,-192.0,0.0,-4.1,0.9535,0.0771,0.759,0.761,0.275,0.356,-0.651,0.489
+4430841,Carson Beck,Georgia,SEC,Pro-Style Starters,4,448,0.647,3485.0,28.0,55.0,71.0,1.0,1.3,0.895,0.1167,0.652,0.683,0.443,0.488,0.013,0.618
+4685345,JC French,Georgia Southern,Sun Belt,High-Volume Dual-Threat,2,410,0.656,2831.0,17.0,118.0,238.0,2.0,2.0,0.9632,0.2464,0.73,0.81,0.319,0.324,0.299,0.391
+4432612,Christian Veilleux,Georgia State,Sun Belt,Situational Scramblers,5,291,0.57,2047.0,13.0,28.0,74.0,1.0,2.6,0.6688,0.0592,0.496,0.557,0.333,0.341,0.208,0.783
+4428993,Haynes King,Georgia Tech,ACC,Balanced Dual-Threat,0,269,0.729,2114.0,14.0,126.0,577.0,11.0,4.6,0.6923,0.2866,0.565,0.571,0.488,0.578,0.298,0.717
+4709977,Brayden Schager,Hawai'i,Mountain West,High-Volume Dual-Threat,2,404,0.577,2591.0,19.0,135.0,267.0,6.0,2.0,0.8782,0.3581,0.738,0.783,0.276,0.251,0.381,0.35
+4690977,Donovan Smith,Houston,Big 12,Pure Game-Managers,3,133,0.654,867.0,4.0,66.0,159.0,3.0,2.4,0.4901,0.1421,0.327,0.346,0.174,0.083,0.41,-0.005
+4597679,Luke Altmyer,Illinois,Big Ten,High-Volume Dual-Threat,2,347,0.608,2717.0,22.0,99.0,217.0,4.0,2.2,1.0442,0.1875,0.801,0.758,0.428,0.465,0.247,0.536
+4430431,Kurtis Rourke,Indiana,Big Ten,Pro-Style Starters,4,320,0.694,3042.0,29.0,46.0,-35.0,2.0,-0.8,0.971,0.0707,0.615,0.634,0.669,0.73,-0.007,0.791
+4427455,Cade McNamara,Iowa,Big Ten,Pure Game-Managers,3,172,0.605,1017.0,6.0,13.0,-31.0,0.0,-2.4,0.6828,0.0125,0.448,0.421,0.214,0.236,0.3,0.191
+4801299,Rocco Becht,Iowa State,Big 12,Pro-Style Starters,4,457,0.595,3505.0,25.0,98.0,318.0,8.0,3.2,1.0206,0.19,0.862,0.864,0.476,0.43,0.715,0.543
+4574356,Tyler Huff,Jacksonville State,Conference USA,Balanced Dual-Threat,0,293,0.608,2543.0,14.0,227.0,1344.0,15.0,5.9,0.9784,0.3581,0.778,0.764,0.576,0.546,0.618,0.555
+4911929,Alonza Barnett,James Madison,Sun Belt,Balanced Dual-Threat,0,354,0.599,2596.0,26.0,135.0,450.0,7.0,3.3,0.9976,0.2241,0.701,0.739,0.391,0.355,0.527,0.665
+4596472,Jalon Daniels,Kansas,Big 12,Balanced Dual-Threat,0,300,0.57,2454.0,14.0,93.0,447.0,6.0,4.8,1.0164,0.2148,0.674,0.646,0.522,0.512,0.555,0.515
+4870857,Avery Johnson,Kansas State,Big 12,Balanced Dual-Threat,0,372,0.583,2712.0,25.0,113.0,605.0,7.0,5.4,1.0437,0.2494,0.694,0.74,0.516,0.487,0.62,0.556
+5083103,Davis Bryson,Kennesaw State,Conference USA,Situational Scramblers,5,261,0.548,1494.0,6.0,112.0,293.0,4.0,2.6,0.8885,0.2453,0.64,0.621,0.088,0.052,0.18,0.341
+5082965,Tommy Ulatowski,Kent State,Mid-American,Situational Scramblers,5,175,0.463,1342.0,15.0,62.0,-22.0,1.0,-0.4,0.5864,0.1161,0.425,0.391,0.508,0.605,0.04,0.738
+4432782,Brock Vandagriff,Kentucky,SEC,Situational Scramblers,5,218,0.573,1593.0,10.0,90.0,131.0,0.0,1.5,0.7278,0.1872,0.578,0.596,0.259,0.328,0.036,0.219
+4567747,Garrett Nussmeier,LSU,SEC,Pro-Style Starters,4,524,0.641,4039.0,29.0,36.0,-39.0,3.0,-1.1,1.0385,0.075,0.738,0.823,0.482,0.467,0.778,0.585
+4432803,Kaidon Salter,Liberty,Conference USA,Balanced Dual-Threat,0,261,0.563,1886.0,15.0,114.0,587.0,7.0,5.1,0.9568,0.2175,0.656,0.712,0.396,0.407,0.368,0.611
+4373895,Ben Wooldridge,Louisiana,Sun Belt,Pro-Style Starters,4,291,0.66,2453.0,17.0,65.0,174.0,5.0,2.7,0.7488,0.1217,0.484,0.515,0.559,0.508,0.85,0.648
+5076949,Evan Bullock,Louisiana Tech,Conference USA,Situational Pocket QBs,1,302,0.659,2107.0,14.0,63.0,-126.0,1.0,-2.0,0.7703,0.0868,0.537,0.579,0.243,0.308,-0.343,0.59
+4360689,Tyler Shough,Louisville,ACC,Pro-Style Starters,4,389,0.627,3195.0,23.0,42.0,19.0,1.0,0.5,0.9654,0.0743,0.739,0.727,0.54,0.559,0.276,0.809
+4600403,Braylon Braxton,Marshall,Sun Belt,Balanced Dual-Threat,0,206,0.602,1624.0,19.0,134.0,610.0,4.0,4.6,0.6867,0.2632,0.535,0.553,0.442,0.55,0.246,0.676
+4592532,Billy Edwards,Maryland,Big Ten,High-Volume Dual-Threat,2,420,0.65,2881.0,15.0,81.0,150.0,5.0,1.9,0.873,0.2012,0.693,0.695,0.306,0.293,0.389,0.511
+4426430,Taisun Phommachanh,Massachusetts,FBS Independents,Situational Scramblers,5,234,0.564,1590.0,8.0,107.0,317.0,3.0,3.0,0.7188,0.1897,0.569,0.535,0.363,0.34,0.428,0.428
+4606194,Seth Henigan,Memphis,American Athletic,Pro-Style Starters,4,477,0.648,3502.0,25.0,80.0,190.0,1.0,2.4,1.0486,0.1479,0.804,0.792,0.449,0.465,0.31,0.628
+4688380,Cameron Ward,Miami,ACC,Pro-Style Starters,4,454,0.672,4313.0,39.0,60.0,204.0,4.0,3.4,1.0,0.1014,0.809,0.75,0.722,0.69,1.108,1.039
+4427243,Brett Gabbert,Miami (OH),Mid-American,High-Volume Dual-Threat,2,379,0.573,2921.0,21.0,55.0,6.0,1.0,0.1,0.9923,0.0792,0.628,0.655,0.351,0.356,0.291,0.471
+4878681,Davis Warren,Michigan,Big Ten,Pure Game-Managers,3,207,0.643,1198.0,7.0,17.0,-22.0,0.0,-1.3,0.6875,0.0255,0.43,0.452,0.256,0.268,0.029,0.618
+5075805,Aidan Chiles,Michigan State,Big Ten,High-Volume Dual-Threat,2,324,0.593,2415.0,13.0,96.0,234.0,3.0,2.4,0.9074,0.2105,0.683,0.727,0.38,0.404,0.269,0.452
+4682518,Nick Vattiato,Middle Tennessee,Conference USA,High-Volume Dual-Threat,2,418,0.644,3092.0,16.0,86.0,77.0,1.0,0.9,1.02,0.2074,0.804,0.824,0.289,0.3,0.208,0.224
+4573398,Max Brosmer,Minnesota,Big Ten,High-Volume Dual-Threat,2,403,0.665,2829.0,18.0,71.0,-37.0,5.0,-0.5,1.007,0.1553,0.686,0.726,0.388,0.392,0.36,0.499
+5079620,Michael Van Buren Jr.,Mississippi State,SEC,Pure Triple-Option,6,256,0.547,1886.0,11.0,69.0,-12.0,5.0,-0.2,1.4545,0.2789,1.099,1.065,0.313,0.308,0.341,0.47
+4429435,Brady Cook,Missouri,SEC,High-Volume Dual-Threat,2,320,0.625,2525.0,11.0,87.0,223.0,5.0,2.6,0.8186,0.1487,0.637,0.625,0.404,0.399,0.426,0.584
+5079301,CJ Bailey,NC State,ACC,Pure Triple-Option,6,302,0.649,2412.0,17.0,99.0,279.0,5.0,2.8,1.6269,0.4679,1.348,1.32,0.491,0.529,0.355,0.705
+5081504,Blake Horvath,Navy,American Athletic,Balanced Dual-Threat,0,139,0.576,1353.0,13.0,176.0,1254.0,17.0,7.1,0.8677,0.3201,0.549,0.576,0.72,0.681,0.756,0.781
+5079572,Dylan Raiola,Nebraska,Big Ten,Pure Triple-Option,6,409,0.67,2806.0,13.0,50.0,-65.0,0.0,-1.3,1.9352,0.1758,1.453,1.333,0.26,0.276,0.171,0.431
+4429149,Brendon Lewis,Nevada,Mountain West,Balanced Dual-Threat,0,312,0.676,2290.0,16.0,157.0,775.0,8.0,4.9,0.9082,0.3249,0.746,0.759,0.432,0.36,0.615,0.531
+5105849,Devon Dampier,New Mexico,Mountain West,Balanced Dual-Threat,0,390,0.579,2768.0,12.0,156.0,1152.0,19.0,7.4,1.0272,0.3965,0.88,0.868,0.441,0.301,0.777,0.564
+5220783,Parker Awad,New Mexico State,Conference USA,Situational Scramblers,5,159,0.465,1079.0,7.0,60.0,109.0,1.0,1.8,1.1419,0.2,0.835,0.819,0.241,0.224,0.309,0.384
+4429463,Jacolby Criswell,North Carolina,ACC,High-Volume Dual-Threat,2,320,0.581,2459.0,15.0,71.0,103.0,3.0,1.5,0.8417,0.1312,0.682,0.674,0.41,0.381,0.581,0.637
+4692530,Chandler Morris,North Texas,American Athletic,Pro-Style Starters,4,509,0.633,3774.0,31.0,60.0,242.0,4.0,4.0,0.9279,0.1532,0.723,0.68,0.483,0.481,0.503,0.49
+4618083,Ethan Hampton,Northern Illinois,Mid-American,Situational Scramblers,5,245,0.584,1608.0,12.0,53.0,129.0,2.0,2.4,0.6703,0.0784,0.413,0.447,0.436,0.419,0.534,0.55
+4911961,Jack Lausch,Northwestern,Big Ten,Situational Scramblers,5,296,0.537,1714.0,7.0,87.0,213.0,2.0,2.4,0.7653,0.2152,0.617,0.614,0.123,0.073,0.343,0.326
+4683423,Riley Leonard,Notre Dame,FBS Independents,Balanced Dual-Threat,0,403,0.667,2861.0,21.0,184.0,906.0,17.0,4.9,0.9475,0.3404,0.709,0.797,0.47,0.381,0.678,0.602
+4610131,Parker Navarro,Ohio,Mid-American,Balanced Dual-Threat,0,295,0.661,2423.0,13.0,160.0,1047.0,18.0,6.5,0.9003,0.2943,0.588,0.647,0.544,0.398,0.84,0.612
+4429955,Will Howard,Ohio State,Big Ten,Pro-Style Starters,4,423,0.73,4010.0,35.0,105.0,226.0,7.0,2.2,0.9872,0.1977,0.685,0.766,0.691,0.755,0.468,0.809
+4870607,Jackson Arnold,Oklahoma,SEC,Situational Scramblers,5,246,0.626,1421.0,12.0,150.0,444.0,3.0,3.0,0.7195,0.2548,0.582,0.59,0.204,0.142,0.357,0.322
+4362159,Alan Bowman,Oklahoma State,Big 12,Situational Pocket QBs,1,340,0.6,2442.0,17.0,24.0,-38.0,0.0,-1.6,0.7709,0.0465,0.612,0.553,0.481,0.51,-0.155,0.433
+5125715,Colton Joseph,Old Dominion,Sun Belt,Balanced Dual-Threat,0,222,0.599,1623.0,11.0,114.0,647.0,11.0,5.7,0.6886,0.2652,0.561,0.523,0.483,0.465,0.522,0.644
+4689114,Jaxson Dart,Ole Miss,SEC,Pro-Style Starters,4,398,0.693,4279.0,29.0,124.0,495.0,3.0,4.0,0.9825,0.2208,0.745,0.651,0.7,0.77,0.396,1.016
+4427238,Dillon Gabriel,Oregon,Big Ten,Pro-Style Starters,4,447,0.729,3857.0,30.0,75.0,149.0,7.0,2.0,1.0063,0.1432,0.796,0.836,0.606,0.627,0.458,1.058
+4887446,Gevani McCoy,Oregon State,Pac-12,Situational Scramblers,5,202,0.609,1300.0,3.0,59.0,328.0,5.0,5.6,0.5714,0.1062,0.424,0.402,0.283,0.115,1.055,0.355
+4714771,Drew Allar,Penn State,Big Ten,Pro-Style Starters,4,394,0.665,3327.0,24.0,96.0,302.0,6.0,3.1,0.9559,0.1448,0.662,0.653,0.52,0.524,0.498,0.637
+4870819,Eli Holstein,Pittsburgh,ACC,Situational Scramblers,5,290,0.617,2225.0,17.0,81.0,328.0,3.0,4.0,0.5974,0.1769,0.51,0.446,0.43,0.426,0.447,0.71
+4429032,Hudson Card,Purdue,Big Ten,Situational Scramblers,5,248,0.581,1641.0,9.0,46.0,-27.0,0.0,-0.6,0.7429,0.082,0.582,0.575,0.225,0.233,0.151,0.588
+4916436,E.J. Warner,Rice,American Athletic,Situational Pocket QBs,1,438,0.619,2710.0,17.0,29.0,12.0,1.0,0.4,0.9137,0.0993,0.74,0.707,0.21,0.254,-0.442,0.388
+4432722,Athan Kaliakmanis,Rutgers,Big Ten,High-Volume Dual-Threat,2,395,0.539,2696.0,18.0,92.0,251.0,3.0,2.7,1.0443,0.1568,0.779,0.698,0.313,0.336,0.243,0.451
+5084084,Kevin Jennings,SMU,ACC,Pro-Style Starters,4,381,0.651,3189.0,23.0,101.0,354.0,5.0,3.5,0.9154,0.1871,0.726,0.736,0.539,0.604,0.26,0.827
+5220424,Hunter Watson,Sam Houston,Conference USA,Pure Triple-Option,6,281,0.623,1811.0,12.0,168.0,647.0,9.0,3.9,1.657,0.5945,1.232,1.42,0.332,0.313,0.373,0.401
+5126474,Danny O'Neil,San Diego State,Mountain West,Pure Triple-Option,6,330,0.633,2181.0,12.0,74.0,89.0,1.0,1.2,1.7432,0.2591,1.225,1.246,0.223,0.248,0.045,0.42
+4694149,Walker Eget,San José State,Mountain West,Situational Pocket QBs,1,328,0.573,2504.0,13.0,29.0,99.0,0.0,3.4,0.6195,0.0943,0.489,0.509,0.31,0.379,-0.46,0.637
+4920227,Giovanni Lopez,South Alabama,Sun Belt,Balanced Dual-Threat,0,311,0.659,2557.0,18.0,82.0,465.0,7.0,5.7,0.8223,0.1756,0.64,0.593,0.557,0.487,0.863,0.793
+4875127,Lanorris Sellers,South Carolina,SEC,Balanced Dual-Threat,0,300,0.657,2527.0,18.0,165.0,681.0,7.0,4.1,0.9265,0.3096,0.669,0.69,0.385,0.454,0.236,0.531
+4806463,Bryce Archie,South Florida,American Athletic,Situational Scramblers,5,290,0.593,1914.0,9.0,68.0,137.0,2.0,2.0,0.6724,0.1196,0.465,0.5,0.204,0.207,0.182,0.045
+4433886,Tate Rodemaker,Southern Miss,Sun Belt,Pure Game-Managers,3,165,0.594,985.0,7.0,26.0,-90.0,0.0,-3.5,0.5142,0.0437,0.369,0.336,0.061,0.136,-0.787,0.428
+4838679,Ashton Daniels,Stanford,ACC,Situational Scramblers,5,271,0.627,1700.0,10.0,148.0,669.0,3.0,4.5,0.6443,0.3516,0.592,0.565,0.204,0.138,0.325,0.407
+4433971,Kyle McCord,Syracuse,ACC,Pro-Style Starters,4,592,0.66,4779.0,34.0,67.0,-65.0,3.0,-1.0,1.0339,0.1375,0.879,0.932,0.512,0.512,0.513,0.569
+4685401,Josh Hoover,TCU,Big 12,Pro-Style Starters,4,471,0.665,3949.0,27.0,47.0,-19.0,4.0,-0.4,1.0286,0.1016,0.756,0.782,0.56,0.59,0.178,0.59
+4431387,Evan Simon,Temple,American Athletic,Situational Scramblers,5,308,0.588,2032.0,15.0,87.0,20.0,3.0,0.2,0.7471,0.1925,0.586,0.636,0.314,0.357,0.104,0.423
+4870799,Nico Iamaleava,Tennessee,SEC,High-Volume Dual-Threat,2,334,0.638,2616.0,19.0,109.0,364.0,3.0,3.3,0.9305,0.1634,0.59,0.588,0.391,0.427,0.241,0.612
+4889929,Quinn Ewers,Texas,SEC,Pro-Style Starters,4,445,0.658,3472.0,31.0,57.0,-82.0,2.0,-1.4,0.8765,0.0547,0.64,0.636,0.475,0.468,0.578,0.757
+4870971,Marcel Reed,Texas A&M,SEC,Balanced Dual-Threat,0,240,0.613,1864.0,15.0,116.0,547.0,7.0,4.7,0.6848,0.2124,0.46,0.506,0.416,0.377,0.508,0.576
+4360890,Jordan McCloud,Texas State,Sun Belt,Pro-Style Starters,4,389,0.699,3222.0,30.0,74.0,278.0,7.0,3.8,0.965,0.1364,0.609,0.645,0.56,0.584,0.554,0.542
+4431465,Behren Morton,Texas Tech,Big 12,High-Volume Dual-Threat,2,463,0.633,3300.0,27.0,55.0,-22.0,1.0,-0.4,0.9139,0.0796,0.692,0.68,0.426,0.442,0.198,0.535
+4429801,Tucker Gleason,Toledo,Mid-American,High-Volume Dual-Threat,2,385,0.605,2793.0,24.0,97.0,364.0,7.0,3.8,0.8618,0.2302,0.701,0.696,0.469,0.51,0.296,0.422
+4877717,Matthew Caldwell,Troy,Sun Belt,Situational Scramblers,5,224,0.629,1608.0,13.0,48.0,47.0,5.0,1.0,0.6952,0.1189,0.462,0.513,0.459,0.488,0.314,0.523
+5121169,Darian Mensah,Tulane,American Athletic,Pro-Style Starters,4,287,0.659,2723.0,22.0,60.0,132.0,1.0,2.2,0.926,0.0891,0.553,0.564,0.667,0.702,0.445,0.843
+5151618,Kirk Francis,Tulsa,American Athletic,Pure Game-Managers,3,253,0.589,1585.0,9.0,34.0,-18.0,0.0,-0.5,0.5753,0.0651,0.416,0.379,0.185,0.22,-0.139,0.145
+4565187,Jalen Kitna,UAB,American Athletic,Situational Pocket QBs,1,316,0.62,2209.0,17.0,45.0,-60.0,0.0,-1.3,0.7521,0.0968,0.604,0.593,0.346,0.415,-0.346,0.565
+4920156,Dylan Rizk,UCF,Big 12,Pure Game-Managers,3,118,0.619,915.0,5.0,29.0,43.0,0.0,1.5,0.3735,0.0435,0.279,0.245,0.261,0.331,-0.153,0.161
+4429068,Ethan Garbers,UCLA,Big Ten,High-Volume Dual-Threat,2,363,0.647,2727.0,16.0,83.0,137.0,1.0,1.7,0.9602,0.1922,0.79,0.841,0.358,0.363,0.317,0.572
+4429582,Joe Fagnano,UConn,FBS Independents,Situational Pocket QBs,1,207,0.58,1631.0,20.0,30.0,60.0,1.0,2.0,0.5668,0.0574,0.321,0.315,0.554,0.619,0.019,0.898
+5122054,Aidan Armenta,UL Monroe,Sun Belt,Situational Scramblers,5,188,0.543,1294.0,9.0,47.0,57.0,1.0,1.2,0.8,0.0741,0.475,0.539,0.295,0.295,0.293,0.284
+4571364,Hajj-Malik Williams,UNLV,Mountain West,Balanced Dual-Threat,0,252,0.595,1941.0,19.0,161.0,851.0,9.0,5.3,0.8772,0.2474,0.607,0.594,0.458,0.39,0.594,0.48
+4431580,Miller Moss,USC,Big Ten,Situational Pocket QBs,1,362,0.644,2555.0,18.0,21.0,-18.0,2.0,-0.9,0.723,0.0474,0.546,0.546,0.389,0.384,0.512,0.622
+5083042,Skyler Locklear,UTEP,Conference USA,Situational Scramblers,5,236,0.631,1591.0,10.0,80.0,237.0,2.0,3.0,0.6606,0.1785,0.478,0.528,0.296,0.291,0.316,0.406
+4775136,Owen McCown,UTSA,American Athletic,Pro-Style Starters,4,467,0.63,3424.0,25.0,86.0,340.0,3.0,4.0,0.9675,0.1447,0.72,0.723,0.439,0.388,0.82,0.498
+5079771,Isaac Wilson,Utah,Big 12,Pure Triple-Option,6,225,0.564,1510.0,10.0,59.0,47.0,0.0,0.8,1.28,0.2316,0.922,0.847,0.187,0.272,-0.277,0.266
+4360480,Spencer Petras,Utah State,Mountain West,Situational Pocket QBs,1,327,0.654,2315.0,17.0,36.0,35.0,1.0,1.0,0.6941,0.0649,0.504,0.448,0.422,0.466,-0.117,0.512
+5084180,Diego Pavia,Vanderbilt,SEC,Balanced Dual-Threat,0,298,0.594,2293.0,20.0,193.0,800.0,8.0,4.1,1.0436,0.4067,0.842,0.851,0.431,0.493,0.318,0.594
+5044387,Anthony Colandrea,Virginia,ACC,Situational Scramblers,5,320,0.619,2125.0,13.0,128.0,277.0,2.0,2.2,0.8254,0.2558,0.691,0.615,0.152,0.174,0.073,0.189
+4678010,Kyron Drones,Virginia Tech,ACC,Situational Scramblers,5,224,0.607,1562.0,10.0,98.0,337.0,6.0,3.4,0.6741,0.2102,0.471,0.557,0.371,0.39,0.324,0.434
+4426499,Hank Bachmeier,Wake Forest,ACC,High-Volume Dual-Threat,2,357,0.627,2593.0,16.0,96.0,141.0,1.0,1.5,0.9161,0.1584,0.718,0.68,0.318,0.335,0.215,0.242
+102597,Will Rogers,Washington,Big Ten,Situational Pocket QBs,1,311,0.707,2458.0,14.0,34.0,-79.0,0.0,-2.3,0.7326,0.0472,0.531,0.507,0.434,0.484,-0.472,0.624
+4915980,John Mateer,Washington State,Pac-12,Balanced Dual-Threat,0,347,0.646,3139.0,29.0,178.0,826.0,15.0,4.6,0.9496,0.3724,0.859,0.768,0.618,0.586,0.721,0.653
+4429847,Garrett Greene,West Virginia,Big 12,Balanced Dual-Threat,0,316,0.598,2300.0,15.0,133.0,751.0,6.0,5.6,0.8804,0.2485,0.647,0.627,0.436,0.391,0.562,0.627
+4869991,Caden Veltkamp,Western Kentucky,Conference USA,High-Volume Dual-Threat,2,389,0.663,3108.0,25.0,113.0,150.0,7.0,1.3,0.8866,0.271,0.697,0.846,0.466,0.549,0.148,0.529
+4430775,Hayden Wolff,Western Michigan,Mid-American,Situational Pocket QBs,1,312,0.667,2410.0,18.0,39.0,-101.0,0.0,-2.6,1.0,0.0417,0.676,0.627,0.432,0.481,-0.475,0.374
+4702829,Braedyn Locke,Wisconsin,Big Ten,Situational Scramblers,5,296,0.554,1936.0,13.0,22.0,4.0,2.0,0.2,0.8387,0.0467,0.649,0.571,0.347,0.35,0.299,0.269
+5082633,Evan Svoboda,Wyoming,Mountain West,Situational Scramblers,5,226,0.491,1308.0,5.0,109.0,237.0,5.0,2.2,0.6749,0.2052,0.502,0.601,0.132,0.036,0.405,0.167

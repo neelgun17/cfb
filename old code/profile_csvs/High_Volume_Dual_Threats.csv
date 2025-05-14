@@ -1,0 +1,8 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+5079555,D.J. Lagway,Florida,SEC,High-Volume Dual-Threats,5,192,0.599,1915.0,12.0,51.0,101.0,0.0,2.0,1.2022,0.1781,0.891,0.951,0.444,0.512,0.069,0.478
+5079620,Michael Van Buren Jr.,Mississippi State,SEC,High-Volume Dual-Threats,5,256,0.547,1886.0,11.0,69.0,-12.0,5.0,-0.2,1.4545,0.2789,1.099,1.065,0.313,0.308,0.341,0.47
+5079301,CJ Bailey,NC State,ACC,High-Volume Dual-Threats,5,302,0.649,2412.0,17.0,99.0,279.0,5.0,2.8,1.6269,0.4679,1.348,1.32,0.491,0.529,0.355,0.705
+5079572,Dylan Raiola,Nebraska,Big Ten,High-Volume Dual-Threats,5,409,0.67,2806.0,13.0,50.0,-65.0,0.0,-1.3,1.9352,0.1758,1.453,1.333,0.26,0.276,0.171,0.431
+5220424,Hunter Watson,Sam Houston,Conference USA,High-Volume Dual-Threats,5,281,0.623,1811.0,12.0,168.0,647.0,9.0,3.9,1.657,0.5945,1.232,1.42,0.332,0.313,0.373,0.401
+5126474,Danny O'Neil,San Diego State,Mountain West,High-Volume Dual-Threats,5,330,0.633,2181.0,12.0,74.0,89.0,1.0,1.2,1.7432,0.2591,1.225,1.246,0.223,0.248,0.045,0.42
+5079771,Isaac Wilson,Utah,Big 12,High-Volume Dual-Threats,5,225,0.564,1510.0,10.0,59.0,47.0,0.0,0.8,1.28,0.2316,0.922,0.847,0.187,0.272,-0.277,0.266

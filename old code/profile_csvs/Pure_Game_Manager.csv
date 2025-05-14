@@ -1,0 +1,32 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+5151948,Joey Aguilar,App State,Sun Belt,Pure Game-Manager,2,390,0.559,3002.0,23.0,58.0,217.0,2.0,3.7,0.8622,0.1132,0.657,0.657,0.446,0.445,0.447,0.696
+4801717,Noah Fifita,Arizona,Big 12,Pure Game-Manager,2,430,0.605,2958.0,18.0,66.0,17.0,1.0,0.3,1.0304,0.1279,0.844,0.853,0.331,0.316,0.516,0.587
+5078810,Sam Leavitt,Arizona State,Big 12,Pure Game-Manager,2,350,0.617,2885.0,24.0,110.0,443.0,5.0,4.0,0.9665,0.1779,0.691,0.577,0.529,0.529,0.54,0.752
+4431325,Taylen Green,Arkansas,SEC,Pure Game-Manager,2,381,0.604,3153.0,15.0,156.0,602.0,8.0,3.9,0.9567,0.3007,0.795,0.75,0.457,0.453,0.471,0.711
+5080403,Jaylen Raynor,Arkansas State,Sun Belt,Pure Game-Manager,2,420,0.617,2783.0,16.0,137.0,387.0,3.0,2.8,0.9831,0.2388,0.82,0.815,0.292,0.31,0.212,0.441
+4430590,Payton Thorne,Auburn,SEC,Pure Game-Manager,2,317,0.628,2713.0,21.0,112.0,283.0,2.0,2.5,0.913,0.2387,0.714,0.671,0.485,0.547,0.24,0.555
+5150611,Jake Retzlaff,BYU,Big 12,Pure Game-Manager,2,367,0.575,2896.0,19.0,100.0,417.0,6.0,4.2,1.0051,0.2154,0.67,0.675,0.387,0.389,0.382,0.532
+4837248,Fernando Mendoza,California,ACC,Pure Game-Manager,2,386,0.687,3004.0,16.0,87.0,105.0,2.0,1.2,0.8598,0.1409,0.638,0.691,0.425,0.418,0.53,0.498
+4899046,Brendan Sorsby,Cincinnati,Big 12,Pure Game-Manager,2,389,0.64,2813.0,18.0,106.0,445.0,9.0,4.2,1.022,0.2549,0.808,0.813,0.439,0.39,0.637,0.711
+4570057,Cole Snyder,Eastern Michigan,Mid-American,Pure Game-Manager,2,402,0.595,2676.0,15.0,136.0,322.0,4.0,2.4,0.9206,0.2437,0.708,0.684,0.274,0.3,0.169,0.566
+5085337,Keyone Jenkins,Florida International,Conference USA,Pure Game-Manager,2,304,0.618,2557.0,22.0,75.0,130.0,2.0,1.7,0.9796,0.1906,0.648,0.692,0.411,0.508,-0.034,0.493
+4685345,JC French,Georgia Southern,Sun Belt,Pure Game-Manager,2,410,0.656,2831.0,17.0,118.0,238.0,2.0,2.0,0.9632,0.2464,0.73,0.81,0.319,0.324,0.299,0.391
+4709977,Brayden Schager,Hawai'i,Mountain West,Pure Game-Manager,2,404,0.577,2591.0,19.0,135.0,267.0,6.0,2.0,0.8782,0.3581,0.738,0.783,0.276,0.251,0.381,0.35
+4597679,Luke Altmyer,Illinois,Big Ten,Pure Game-Manager,2,347,0.608,2717.0,22.0,99.0,217.0,4.0,2.2,1.0442,0.1875,0.801,0.758,0.428,0.465,0.247,0.536
+4801299,Rocco Becht,Iowa State,Big 12,Pure Game-Manager,2,457,0.595,3505.0,25.0,98.0,318.0,8.0,3.2,1.0206,0.19,0.862,0.864,0.476,0.43,0.715,0.543
+4911929,Alonza Barnett,James Madison,Sun Belt,Pure Game-Manager,2,354,0.599,2596.0,26.0,135.0,450.0,7.0,3.3,0.9976,0.2241,0.701,0.739,0.391,0.355,0.527,0.665
+4870857,Avery Johnson,Kansas State,Big 12,Pure Game-Manager,2,372,0.583,2712.0,25.0,113.0,605.0,7.0,5.4,1.0437,0.2494,0.694,0.74,0.516,0.487,0.62,0.556
+4592532,Billy Edwards,Maryland,Big Ten,Pure Game-Manager,2,420,0.65,2881.0,15.0,81.0,150.0,5.0,1.9,0.873,0.2012,0.693,0.695,0.306,0.293,0.389,0.511
+5075805,Aidan Chiles,Michigan State,Big Ten,Pure Game-Manager,2,324,0.593,2415.0,13.0,96.0,234.0,3.0,2.4,0.9074,0.2105,0.683,0.727,0.38,0.404,0.269,0.452
+4682518,Nick Vattiato,Middle Tennessee,Conference USA,Pure Game-Manager,2,418,0.644,3092.0,16.0,86.0,77.0,1.0,0.9,1.02,0.2074,0.804,0.824,0.289,0.3,0.208,0.224
+4573398,Max Brosmer,Minnesota,Big Ten,Pure Game-Manager,2,403,0.665,2829.0,18.0,71.0,-37.0,5.0,-0.5,1.007,0.1553,0.686,0.726,0.388,0.392,0.36,0.499
+4429149,Brendon Lewis,Nevada,Mountain West,Pure Game-Manager,2,312,0.676,2290.0,16.0,157.0,775.0,8.0,4.9,0.9082,0.3249,0.746,0.759,0.432,0.36,0.615,0.531
+4429463,Jacolby Criswell,North Carolina,ACC,Pure Game-Manager,2,320,0.581,2459.0,15.0,71.0,103.0,3.0,1.5,0.8417,0.1312,0.682,0.674,0.41,0.381,0.581,0.637
+4432722,Athan Kaliakmanis,Rutgers,Big Ten,Pure Game-Manager,2,395,0.539,2696.0,18.0,92.0,251.0,3.0,2.7,1.0443,0.1568,0.779,0.698,0.313,0.336,0.243,0.451
+4875127,Lanorris Sellers,South Carolina,SEC,Pure Game-Manager,2,300,0.657,2527.0,18.0,165.0,681.0,7.0,4.1,0.9265,0.3096,0.669,0.69,0.385,0.454,0.236,0.531
+4870799,Nico Iamaleava,Tennessee,SEC,Pure Game-Manager,2,334,0.638,2616.0,19.0,109.0,364.0,3.0,3.3,0.9305,0.1634,0.59,0.588,0.391,0.427,0.241,0.612
+4429801,Tucker Gleason,Toledo,Mid-American,Pure Game-Manager,2,385,0.605,2793.0,24.0,97.0,364.0,7.0,3.8,0.8618,0.2302,0.701,0.696,0.469,0.51,0.296,0.422
+4429068,Ethan Garbers,UCLA,Big Ten,Pure Game-Manager,2,363,0.647,2727.0,16.0,83.0,137.0,1.0,1.7,0.9602,0.1922,0.79,0.841,0.358,0.363,0.317,0.572
+4775136,Owen McCown,UTSA,American Athletic,Pure Game-Manager,2,467,0.63,3424.0,25.0,86.0,340.0,3.0,4.0,0.9675,0.1447,0.72,0.723,0.439,0.388,0.82,0.498
+4426499,Hank Bachmeier,Wake Forest,ACC,Pure Game-Manager,2,357,0.627,2593.0,16.0,96.0,141.0,1.0,1.5,0.9161,0.1584,0.718,0.68,0.318,0.335,0.215,0.242
+4869991,Caden Veltkamp,Western Kentucky,Conference USA,Pure Game-Manager,2,389,0.663,3108.0,25.0,113.0,150.0,7.0,1.3,0.8866,0.271,0.697,0.846,0.466,0.549,0.148,0.529

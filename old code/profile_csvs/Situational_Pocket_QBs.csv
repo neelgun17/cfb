@@ -1,0 +1,25 @@
+player_id,player_name,team,conference,qb_profile,cluster,passing_att,passing_pct,passing_yds,passing_td,rushing_car,rushing_yds,rushing_td,rushing_ypc,usage.pass,usage.rush,usage.passingDowns,usage.thirdDown,averagePPA.all,averagePPA.pass,averagePPA.rush,averagePPA.passingDowns
+4431091,Ben Finley,Akron,Mid-American,Situational Pocket QBs,3,387,0.545,2581.0,16.0,80.0,51.0,0.0,0.6,0.8555,0.1881,0.723,0.689,0.283,0.319,0.054,0.488
+5091890,Kadin Semonza,Ball State,Mid-American,Situational Pocket QBs,3,427,0.644,2900.0,25.0,54.0,-81.0,1.0,-1.5,1.0108,0.0776,0.759,0.813,0.347,0.355,0.19,0.556
+4426444,Connor Bazelak,Bowling Green,Mid-American,Situational Pocket QBs,3,402,0.669,3044.0,18.0,48.0,-91.0,2.0,-1.9,0.991,0.0777,0.67,0.684,0.406,0.405,0.428,0.467
+5138131,Deshawn Purdie,Charlotte,American Athletic,Situational Pocket QBs,3,200,0.5,1802.0,10.0,41.0,-130.0,1.0,-3.2,1.0851,0.0852,0.698,0.781,0.276,0.306,-0.124,0.188
+4833597,Brayden Fowler-Nicolosi,Colorado State,Mountain West,Situational Pocket QBs,3,374,0.607,2755.0,14.0,43.0,80.0,4.0,1.9,0.9974,0.0998,0.763,0.729,0.419,0.471,-0.013,0.612
+4685497,Maalik Murphy,Duke,ACC,Situational Pocket QBs,3,421,0.603,2932.0,26.0,19.0,-79.0,2.0,-4.2,0.9383,0.0407,0.664,0.719,0.48,0.488,0.252,0.699
+4597499,Mikey Keene,Fresno State,Mountain West,Situational Pocket QBs,3,392,0.704,2887.0,18.0,47.0,-192.0,0.0,-4.1,0.9535,0.0771,0.759,0.761,0.275,0.356,-0.651,0.489
+4432612,Christian Veilleux,Georgia State,Sun Belt,Situational Pocket QBs,3,291,0.57,2047.0,13.0,28.0,74.0,1.0,2.6,0.6688,0.0592,0.496,0.557,0.333,0.341,0.208,0.783
+5082965,Tommy Ulatowski,Kent State,Mid-American,Situational Pocket QBs,3,175,0.463,1342.0,15.0,62.0,-22.0,1.0,-0.4,0.5864,0.1161,0.425,0.391,0.508,0.605,0.04,0.738
+5076949,Evan Bullock,Louisiana Tech,Conference USA,Situational Pocket QBs,3,302,0.659,2107.0,14.0,63.0,-126.0,1.0,-2.0,0.7703,0.0868,0.537,0.579,0.243,0.308,-0.343,0.59
+4427243,Brett Gabbert,Miami (OH),Mid-American,Situational Pocket QBs,3,379,0.573,2921.0,21.0,55.0,6.0,1.0,0.1,0.9923,0.0792,0.628,0.655,0.351,0.356,0.291,0.471
+4878681,Davis Warren,Michigan,Big Ten,Situational Pocket QBs,3,207,0.643,1198.0,7.0,17.0,-22.0,0.0,-1.3,0.6875,0.0255,0.43,0.452,0.256,0.268,0.029,0.618
+4362159,Alan Bowman,Oklahoma State,Big 12,Situational Pocket QBs,3,340,0.6,2442.0,17.0,24.0,-38.0,0.0,-1.6,0.7709,0.0465,0.612,0.553,0.481,0.51,-0.155,0.433
+4429032,Hudson Card,Purdue,Big Ten,Situational Pocket QBs,3,248,0.581,1641.0,9.0,46.0,-27.0,0.0,-0.6,0.7429,0.082,0.582,0.575,0.225,0.233,0.151,0.588
+4916436,E.J. Warner,Rice,American Athletic,Situational Pocket QBs,3,438,0.619,2710.0,17.0,29.0,12.0,1.0,0.4,0.9137,0.0993,0.74,0.707,0.21,0.254,-0.442,0.388
+4694149,Walker Eget,San José State,Mountain West,Situational Pocket QBs,3,328,0.573,2504.0,13.0,29.0,99.0,0.0,3.4,0.6195,0.0943,0.489,0.509,0.31,0.379,-0.46,0.637
+4431387,Evan Simon,Temple,American Athletic,Situational Pocket QBs,3,308,0.588,2032.0,15.0,87.0,20.0,3.0,0.2,0.7471,0.1925,0.586,0.636,0.314,0.357,0.104,0.423
+4565187,Jalen Kitna,UAB,American Athletic,Situational Pocket QBs,3,316,0.62,2209.0,17.0,45.0,-60.0,0.0,-1.3,0.7521,0.0968,0.604,0.593,0.346,0.415,-0.346,0.565
+4429582,Joe Fagnano,UConn,FBS Independents,Situational Pocket QBs,3,207,0.58,1631.0,20.0,30.0,60.0,1.0,2.0,0.5668,0.0574,0.321,0.315,0.554,0.619,0.019,0.898
+4431580,Miller Moss,USC,Big Ten,Situational Pocket QBs,3,362,0.644,2555.0,18.0,21.0,-18.0,2.0,-0.9,0.723,0.0474,0.546,0.546,0.389,0.384,0.512,0.622
+4360480,Spencer Petras,Utah State,Mountain West,Situational Pocket QBs,3,327,0.654,2315.0,17.0,36.0,35.0,1.0,1.0,0.6941,0.0649,0.504,0.448,0.422,0.466,-0.117,0.512
+102597,Will Rogers,Washington,Big Ten,Situational Pocket QBs,3,311,0.707,2458.0,14.0,34.0,-79.0,0.0,-2.3,0.7326,0.0472,0.531,0.507,0.434,0.484,-0.472,0.624
+4430775,Hayden Wolff,Western Michigan,Mid-American,Situational Pocket QBs,3,312,0.667,2410.0,18.0,39.0,-101.0,0.0,-2.6,1.0,0.0417,0.676,0.627,0.432,0.481,-0.475,0.374
+4702829,Braedyn Locke,Wisconsin,Big Ten,Situational Pocket QBs,3,296,0.554,1936.0,13.0,22.0,4.0,2.0,0.2,0.8387,0.0467,0.649,0.571,0.347,0.35,0.299,0.269
