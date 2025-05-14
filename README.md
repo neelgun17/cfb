@@ -1,7 +1,9 @@
 # College Football QB Archetype Project
 
-**Version:** 1.0 (Date: YYYY-MM-DD)
-**Author(s):** [Your Name/Group]
+**Version:** 1.0 
+**Author(s):** Neel Gundlapally
+
+## Table of Contents
 
 ## Table of Contents
 1.  [Project Overview](#project-overview)
@@ -11,15 +13,18 @@
     *   [Feature Engineering & Selection](#feature-engineering--selection)
 4.  [Methodology](#methodology)
     *   [Data Preprocessing](#data-preprocessing)
-    *   [Dimensionality Reduction](#dimensionality-reduction)
-    *   [Clustering Algorithm](#clustering-algorithm)
-    *   [Manual Adjustments](#manual-adjustments)
-5.  [QB Archetype Definitions (k=4, Hierarchical Clustering)](#qb-archetype-definitions)
-    *   [Archetype 1: [Scrambling Survivors]](#archetype-1)
-    *   [Archetype 2: [Pocket Managers]](#archetype-2)
-    *   [Archetype 3: [Dynamic Dual-Threats]](#archetype-3)
-    *   [Archetype 4: [Mobile Pocket Passers]](#archetype-4)
-6.  [Key Findings & Observations](#key-findings--observations)
+    *   [Dimensionality Reduction (for Clustering Exploration)](#dimensionality-reduction-for-clustering-exploration) 
+    *   [Archetype Discovery: Clustering Algorithm](#archetype-discovery-clustering-algorithm)
+    *   [Manual Adjustments to Archetypes](#manual-adjustments-to-archetypes) <!-- MODIFIED -->
+    *   **[NEW SECTION] Archetype Prediction: Supervised Classification(#archetype-prediction-supervised-classification)**
+5.  [QB Archetype Definitions (k=4, Finalized)](#qb-archetype-definitions) 
+    *   [Archetype 1: Scrambling Survivors](#archetype-1)
+    *   [Archetype 2: Pocket Managers](#archetype-2)
+    *   [Archetype 3: Dynamic Dual-Threats](#archetype-3)
+    *   [Archetype 4: Mobile Pocket Passers](#archetype-4)
+6.  [Key Findings & Results](#key-findings--results)
+    *   [Clustering Insights](#clustering-insights) 
+    *   [Classification Model Performance](#classification-model-performance)
 7.  [Limitations](#limitations)
 8.  [Future Work & Potential Applications](#future-work--potential-applications)
 9.  [Setup & Usage (If Applicable)](#setup--usage)
@@ -29,7 +34,8 @@
 ---
 
 ## 1. Project Overview
-This project aims to analyze 2024 projected PFF college football quarterback data to identify distinct player archetypes. By leveraging nearly 300 statistical columns, the goal is to group QBs based on their on-field tendencies, efficiencies, and play styles. These archetypes can then be used for applications such as predicting system fit for transfers, scouting, and further machine learning endeavors.
+This project aims to analyze 2024 projected PFF college football quarterback data to identify distinct player archetypes. By leveraging nearly 300 statistical columns, the goal is to group QBs based on their on-field tendencies, efficiencies, and play styles. **Following the discovery of these archetypes through unsupervised clustering, a supervised classification model was developed to predict these archetypes for new players.** These archetypes and the predictive model can then be used for applications such as predicting system fit for transfers, scouting, and further machine learning endeavors.
+
 
 ---
 
@@ -37,7 +43,8 @@ This project aims to analyze 2024 projected PFF college football quarterback dat
 *   To process and refine a large dataset of PFF QB statistics.
 *   To identify natural groupings (archetypes) of quarterbacks using unsupervised machine learning techniques.
 *   To define these archetypes based on their statistical profiles and representative players.
-*   To create a labeled dataset that can be used for future supervised learning tasks.
+*   To develop an accurate supervised classification model to predict the identified QB archetypes based on player statistics.
+*   To create a labeled dataset that can be used for future supervised learning tasks and to provide feature importances for archetype differentiation.
 *   Ultimately, to develop a system for recommending player-team fits based on QB archetype and offensive scheme profiles.
 
 ---
@@ -75,18 +82,28 @@ The initial ~400 features were reduced to a more manageable and impactful set of
 *   **Parameters:** [e.g., For PCA: `n_components` set to retain 90% of variance.]
 *   **Result:** The [301] scaled features were reduced to [33] dimensions for clustering.
 
-### 4.3. Clustering Algorithm
+### 4.3. Archetype Discovery: Clustering Algorithm
 *   **Algorithm:** Hierarchical Agglomerative Clustering (`sklearn.cluster.AgglomerativeClustering`)
 *   **Linkage Method:** 'ward' (minimizes the variance of the clusters being merged)
 *   **Number of Clusters (k):** 4 (determined by analyzing dendrograms, silhouette scores from previous K-Means iterations, and interpretability of resulting cluster profiles).
-
-### 4.4. Manual Adjustments
-Following the algorithmic clustering, a manual review of player assignments was conducted. For a small number of players whose statistical profiles clearly indicated a better fit with a different archetype than assigned by the algorithm, manual reclassifications were made. These include:
-*   [Player Name 1]: Moved from [Algorithmic Cluster X] to [Final Archetype Y] because [Brief Justification based on key stats].
-*   [Player Name 2]: Moved from [...] to [...] because [...].
-*   *(List all manual changes here for transparency)*
-
 ---
+### 4.4. Archetype Prediction: Supervised Classification
+Once the QB archetypes were finalized, a supervised learning approach was employed to build a model capable of predicting these archetypes from player statistics.
+1.  **Data Preparation:**
+    *   The finalized archetype labels were used as the target variable.
+    *   The same set of [Number, e.g., 38] scaled features used for informing the clustering process was used as input features for the classifier.
+    *   The data was split into training (75%) and testing (25%) sets, with stratification to maintain class proportions.
+2.  **Model Selection & Tuning:**
+    *   Several models were evaluated (Logistic Regression, SVC, default Random Forest, default XGBoost).
+    *   **Random Forest Classifier** was selected as the best-performing base model.
+    *   Hyperparameter tuning was conducted using `GridSearchCV` with 3-fold stratified cross-validation, optimizing for `f1_weighted` score.
+    *   The `class_weight='balanced'` parameter was utilized to address the imbalance in archetype representation.
+3.  **Best Model Parameters (Random Forest):**
+    *   `class_weight`: 'balanced'
+    *   `max_depth`: 5
+    *   `min_samples_leaf`: 2
+    *   `min_samples_split`: 10
+    *   `n_estimators`: 300
 
 ## 5. QB Archetype Definitions (k=4, Hierarchical Clustering - Finalized)
 
@@ -178,20 +195,53 @@ Below are the definitions of the four QB archetypes identified, based on the mea
 ---
 
 ## 6. Key Findings & Observations
+### 6.1. Clustering Insights
 *   The hierarchical clustering approach with a revised, balanced feature set yielded four statistically distinct QB archetypes.
 *   A key success was the clearer separation of "Dynamic Dual-Threats" (HC2) from "Elite Efficient Passers (with some pocket mobility)" (HC3) and "Pocket Managers" (HC1), which was a challenge with earlier K-Means iterations.
 *   Players with elite passing efficiency but minimal designed run games (e.g., [Sanders, Ward if you moved them to HC1]) were better classified by [explaining your final decision/manual adjustment rationale].
 *   Noah Fifita presented a unique challenge, initially misclassified by [K-Means/Hierarchical HC0] due to [likely low BTT rate], but his overall profile strongly aligns with [HC1 - Pocket Managers] after manual review.
 *   The "Scrambling Survivors" (HC0) capture a group that relies heavily on out-of-structure plays and faces significant pressure, often leading to riskier passing outcomes.
 *   Low-volume players were generally distributed among the archetypes based on their limited statistical profiles.
+*   The hierarchical clustering approach, using Ward's linkage on [Number, e.g., 38] scaled features, successfully identified four statistically distinct QB archetypes from the [153] qualifying players.
+*   Key differentiators initially observed from cluster profiles included [mention 2-3 key differentiating aspects from your cluster profile analysis, e.g., "rushing volume/efficiency, passing depth/risk, and performance under pressure."]
+*   Manual adjustments were minimal but crucial for refining assignments for a few players whose statistical nuances were better captured by domain knowledge.
+*   A key success was the clearer separation of "Dynamic Dual-Threats" from "Mobile Pocket Passers" and "Pocket Managers."
+*   The "Scrambling Survivors" capture a group that relies heavily on out-of-structure plays.
+---
+### 6.2. Classification Model Performance
+A Random Forest classifier was trained and tuned to predict the four finalized QB archetypes. The model demonstrated strong performance on the held-out test set:
+
+*   **Overall Test Accuracy:** **0.8718**
+*   **Macro Averaged F1-Score (Test Set):** 0.87
+*   **Weighted Averaged F1-Score (Test Set):** 0.87
+
+**Per-Class Performance (Test Set):**
+
+| Archetype              | Precision | Recall | F1-Score | Support |
+| :--------------------- | :-------- | :----- | :------- | :------ |
+| Dynamic Dual-Threats   | 0.83      | 1.00   | 0.91     | 5       |
+| Mobile Pocket Passer   | 1.00      | 0.71   | 0.83     | 7       |
+| Pocket Managers        | 0.85      | 0.94   | 0.89     | 18      |
+| Scrambling Survivors   | 0.88      | 0.78   | 0.82     | 9       |
+**Key Feature Importances (from Best Random Forest Classifier):**
+The model found the following features most influential in distinguishing between archetypes:
+1.  `grades_offense`
+2.  `td_int_ratio`
+3.  `completion_percent`
+4.  `grades_pass`
+5.  `pressure_rate`
+    *(List your top 5-10, or refer to a plot)*
+
+This high performance indicates that the statistically-derived archetypes are learnable and predictable from player features, validating their distinctiveness.
 
 ---
 
 ## 7. Limitations
-*   **Unsupervised Nature:** Clustering identifies patterns but doesn't guarantee perfect alignment with preconceived notions or all individual player nuances. Some "edge case" players may not fit perfectly into any single archetype.
-*   **Feature Sensitivity:** The choice and weighting of features can significantly influence clustering outcomes. While efforts were made to balance the feature set, different selections could yield different groupings.
-*   **"Hard" Clustering:** Both K-Means (initially explored) and Hierarchical Clustering (with a fixed k) assign each player to only one cluster, which may not fully capture hybrid play styles.
-*   **Impact of Dimensionality Reduction:** PCA, while necessary, involves some information loss which can affect clustering.
+*   **Unsupervised Nature of Archetype Definition:** Clustering identifies patterns but doesn't guarantee perfect alignment with preconceived notions. The "ground truth" labels for the classifier are derived from this unsupervised process (+ manual tweaks).
+*   **Small Sample Size for "Dynamic Dual-Threats":** While the classifier performed surprisingly well on this class in the test set (N=5), the overall population for this archetype (N=18) is small, which can impact model robustness and generalization for this specific group.
+*   **Feature Sensitivity:** The choice of features impacts both clustering and classification.
+*   **"Hard" Assignments:** Both the clustering and classification assign players to a single archetype, which may not fully capture hybrid styles.
+*   **Impact of PCA (for initial k-exploration):** While PCA was used for initial K-Means exploration of k, it was not used for the final hierarchical clustering or supervised model features, mitigating direct information loss in the final models. 
 
 ---
 
