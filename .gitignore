@@ -1,4 +1,4 @@
 # Ignore config files
 config.ini
 
-.csv
+*.csv
