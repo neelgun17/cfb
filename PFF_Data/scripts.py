@@ -148,9 +148,9 @@ def extract_player_passing():
             # Add new column names to the header
             final_header = final_header_parts + [td_int_ratio]
             processed_rows.append(final_header)
-            print()
-            print(f"  Final output header Passing: {final_header}")
-            print(len(final_header))
+            # print()
+            # print(f"  Final output header Passing: {final_header}")
+            # print(len(final_header))
 
             # Process data rows
             for original_row in reader:
@@ -253,9 +253,9 @@ def extract_player_rushing():
             rename("yards", "rushing")
             rename("ypa","rushing")
             rename("first_downs","rushing")
-            print()
-            print(f"  Final output header rushing: {final_header}")
-            print(len(final_header))
+            # print()
+            # print(f"  Final output header rushing: {final_header}")
+            # print(len(final_header))
             with open(output_summary_path, mode='w', newline='') as outfile:
                 writer = csv.writer(outfile)
                 writer.writerows(processed_rows)
@@ -374,9 +374,9 @@ def extract_concept_fields():
         with open(output_summary_path, mode='w', newline='') as outfile:
             writer = csv.writer(outfile)
             writer.writerows(filtered_rows)
-            print()
-            print(f"  Final output header concept: {final_header}")
-            print(len(final_header))
+            # print()
+            # print(f"  Final output header concept: {final_header}")
+            # print(len(final_header))
         return output_summary_path
     except Exception as e:
         print(f"  An error occurred during player concept summary creation: {e}")
@@ -441,9 +441,9 @@ def extract_depth_fields():
         with open(output_summary_path, mode='w', newline='') as outfile:
             writer = csv.writer(outfile)
             writer.writerows(filtered_rows)
-            print()
-            print(f"  Final output header depth: {final_header}")
-            print(len(final_header))
+            # print()
+            # print(f"  Final output header depth: {final_header}")
+            # print(len(final_header))
         return output_summary_path
     except Exception as e:
         print(f"  An error occurred during player concept summary creation: {e}")
@@ -504,9 +504,9 @@ def extract_pressure_fields():
         with open(output_summary_path, mode='w', newline='') as outfile:
             writer = csv.writer(outfile)
             writer.writerows(filtered_rows)
-            print()
-            print(f"  Final output header pressure: {final_header}")
-            print(len(final_header))
+            # print()
+            # print(f"  Final output header pressure: {final_header}")
+            # print(len(final_header))
         return output_summary_path
     except Exception as e:
         print(f"  An error occurred during player concept summary creation: {e}")
@@ -546,7 +546,7 @@ def extract_pocket_time_fields():
 
 
 
-    print(len(recommended_fields))
+    # print(len(recommended_fields))
     # Always use the actual processed summary path for reading
     try:
         with open(summary_path, mode='r', newline='') as infile:
@@ -568,9 +568,9 @@ def extract_pocket_time_fields():
         with open(output_summary_path, mode='w', newline='') as outfile:
             writer = csv.writer(outfile)
             writer.writerows(filtered_rows)
-            print()
-            print(f"  Final output header time: {final_header}")
-            print(len(final_header))
+            # print()
+            # print(f"  Final output header time: {final_header}")
+            # print(len(final_header))
         return output_summary_path
     except Exception as e:
         print(f"  An error occurred during player concept summary creation: {e}")
