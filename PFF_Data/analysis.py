@@ -13,7 +13,7 @@ df = pd.read_csv('/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/process
 df.columns = df.columns.str.rstrip('_')
 df.rename(columns=lambda c: c.replace('.', '_'), inplace=True)
 print(len(df))
-df_filtered = df[df["dropbacks"].astype(int) >= 125]
+df_filtered = df[df["dropbacks"].astype(int) >= 150]
 print(df.shape)
 # Assuming 'df_filtered' is your main DataFrame after initial filtering (e.g., by dropbacks)
 # and it contains columns like 'player', 'player_id', 'team_name'

@@ -41,7 +41,7 @@ try:
     df_original_stats.rename(columns=lambda c: c.replace('.', '_'), inplace=True)
 
     # Filter original stats (e.g., by dropbacks) - this should match the filter used BEFORE clustering
-    df_filtered_stats = df_original_stats[df_original_stats["dropbacks"].astype(int) >= 125].copy()
+    df_filtered_stats = df_original_stats[df_original_stats["dropbacks"].astype(int) >= 150].copy()
 
     # Merge to get features AND labels for the CLUSTERED players ONLY
     # This ensures X and y are perfectly aligned and only include players who have an archetype
