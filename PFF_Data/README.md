@@ -49,29 +49,29 @@ pip install -r requirements.txt
 
 ```bash
 # Run the complete pipeline (default year 2024)
-python main_pipeline.py
+python3 main_pipeline.py
 
 # Run for a specific year
-python main_pipeline.py --year 2024
+python3 main_pipeline.py --year 2024
 
 # Run with specific models
-python main_pipeline.py --models recall_optimized standard --year 2024
+python3 main_pipeline.py --models recall_optimized standard --year 2024
 
 # Force retrain models (ignore existing models)
-python main_pipeline.py --force-retrain --year 2024
+python3 main_pipeline.py --force-retrain --year 2024
 ```
 
 ### 3. Run Individual Steps
 
 ```bash
 # Data processing only
-python main_pipeline.py --step data_processing --year 2024
+python3 main_pipeline.py --step data_processing --year 2024
 
 # Clustering only
-python main_pipeline.py --step clustering --year 2024
+python3 main_pipeline.py --step clustering --year 2024
 
 # Model training only
-python main_pipeline.py --step model_training --year 2024
+python3 main_pipeline.py --step model_training --year 2024
 
 
 ```
@@ -80,16 +80,16 @@ python main_pipeline.py --step model_training --year 2024
 
 ```bash
 # Train both recall-optimized and standard models
-python main_pipeline.py --models recall_optimized standard --year 2024
+python3 main_pipeline.py --models recall_optimized standard --year 2024
 
 # Train only standard model
-python main_pipeline.py --models standard --year 2024
+python3 main_pipeline.py --models standard --year 2024
 
 # Run with debug logging
-python main_pipeline.py --log-level DEBUG --year 2024
+python3 main_pipeline.py --log-level DEBUG --year 2024
 
 # Run with minimal logging
-python main_pipeline.py --log-level WARNING --year 2024
+python3 main_pipeline.py --log-level WARNING --year 2024
 ```
 
 ### 5. Enhanced QB Archetype Prediction API
@@ -367,13 +367,13 @@ The pipeline includes intelligent model management to save time and computationa
 ### Usage Examples
 ```bash
 # First run - trains new models (slow)
-python main_pipeline.py --year 2023
+python3 main_pipeline.py --year 2023
 
 # Subsequent runs - loads existing models (fast)
-python main_pipeline.py --year 2023
+python3 main_pipeline.py --year 2023
 
 # Force retrain - ignores existing models (slow)
-python main_pipeline.py --force-retrain --year 2023
+python3 main_pipeline.py --force-retrain --year 2023
 ```
 
 ## 🎯 QB Archetypes
@@ -436,34 +436,34 @@ MODEL_PARAMS = {
 ### Basic Usage
 ```bash
 # Run everything (default year 2023)
-python main_pipeline.py
+python3 main_pipeline.py
 
 # Run for a specific year
-python main_pipeline.py --year 2023
+python3 main_pipeline.py --year 2023
 
 # Run with verbose logging
-python main_pipeline.py --log-level DEBUG --year 2023
+python3 main_pipeline.py --log-level DEBUG --year 2023
 ```
 
 ### Advanced Usage
 ```bash
 # Train only recall-optimized model
-python main_pipeline.py --step model_training --models recall_optimized --year 2023
+python3 main_pipeline.py --step model_training --models recall_optimized --year 2023
 
 # Force retrain a specific model (ignore existing model)
-python main_pipeline.py --step model_training --models recall_optimized --force-retrain --year 2023
+python3 main_pipeline.py --step model_training --models recall_optimized --force-retrain --year 2023
 
 # Run clustering with custom parameters (edit config.py first)
-python main_pipeline.py --step clustering --year 2023
+python3 main_pipeline.py --step clustering --year 2023
 
 # Train both model types
-python main_pipeline.py --models recall_optimized standard --year 2023
+python3 main_pipeline.py --models recall_optimized standard --year 2023
 ```
 
 ### Most Common Usage
 ```bash
 # For typical workflow (recommended)
-python main_pipeline.py --year 2024
+python3 main_pipeline.py --year 2024
 ```
 
 This will run the full pipeline (data processing → clustering → model training) with recall-optimized models for 2024 data.
@@ -527,7 +527,7 @@ The pipeline provides comprehensive logging:
 
 ### Debug Mode
 ```bash
-python main_pipeline.py --log-level DEBUG
+python3 main_pipeline.py --log-level DEBUG
 ```
 
 ## 📚 Dependencies
