@@ -285,15 +285,15 @@ class DataProcessor:
                     df_with_features.at[idx, 'scramble_rate'] = np.nan
                 
                 # YAC per rush attempt
-                if row.get('rush_attempts', 0) > 0:
-                    df_with_features.at[idx, 'YAC_per_rush_attempt'] = row.get('yac_rushing', 0) / row.get('rush_attempts', 0)
+                if row.get('attempts', 0) > 0:
+                    df_with_features.at[idx, 'YAC_per_rush_attempt'] = row.get('yards_after_contact', 0) / row.get('attempts', 0)
                 else:
                     df_with_features.at[idx, 'YAC_per_rush_attempt'] = np.nan
                 
                 # Percentage of total yards from rushing
-                total_yards = row.get('passing_yards', 0) + row.get('rushing_yards', 0)
+                total_yards = row.get('yards', 0) + row.get('yards_rushing', 0)
                 if total_yards > 0:
-                    df_with_features.at[idx, 'pct_total_yards_rushing'] = row.get('rushing_yards', 0) / total_yards
+                    df_with_features.at[idx, 'pct_total_yards_rushing'] = row.get('yards_rushing', 0) / total_yards
                 else:
                     df_with_features.at[idx, 'pct_total_yards_rushing'] = np.nan
                 
