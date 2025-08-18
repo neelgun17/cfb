@@ -10,8 +10,18 @@ from pathlib import Path
 PROJECT_ROOT = Path("/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data")
 
 # --- Year Configuration ---
-YEARS = [2019, 2023]  # Add new years here
-CURRENT_YEAR = 2023   # Default year for processing
+YEARS = [2019, 2024]  # Add new years here
+# Global configuration
+CURRENT_YEAR = 2024
+
+# AI Analyzer Configuration
+# Options: "lightweight" (fast, rule-based) or "qwen" (detailed, LLM-based)
+AI_ANALYZER_TYPE = "lightweight"  # Change to "qwen" for detailed analysis
+
+# Qwen3:8B Configuration (only used when AI_ANALYZER_TYPE = "lightweight")
+QWEN_TIMEOUT = 180  # seconds (increased for complex comparisons)
+QWEN_MODEL = "qwen3:8b"
+QWEN_URL = "http://localhost:11434"
 
 # --- Data Directories (New Clean Structure) ---
 DATA_DIR = PROJECT_ROOT / "data"
@@ -82,7 +92,8 @@ def get_analysis_files(year=None):
     return {
         'player_assignments': analysis_dir / "hierarchical_player_assignments_k4.csv",
         'cluster_profiles': analysis_dir / "hierarchical_profiles_k4.csv",
-        'cluster_data_scaled': analysis_dir / "cluster_data_scaled_df.csv"
+        'cluster_data_scaled': analysis_dir / "cluster_data_scaled_df.csv",
+        'final_merged': analysis_dir / "final_merged_qb_data_with_archetypes.csv"
     }
 
 def get_model_files(year=None, model_type='recall_optimized'):

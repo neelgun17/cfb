@@ -29,10 +29,11 @@ logger = logging.getLogger(__name__)
 class QBModelTrainer:
     """Handles training and evaluation of QB archetype classification models."""
     
-    def __init__(self, model_type: str = 'recall_optimized', year: int = None):
+    def __init__(self, model_type: str = 'recall_optimized', year: int = None, force_retrain: bool = False):
         """Initialize the model trainer for a specific year and model type."""
         self.model_type = model_type
         self.year = year if year is not None else CURRENT_YEAR
+        self.force_retrain = force_retrain
         self.analysis_files = get_analysis_files(self.year)
         self.model_files = get_model_files(self.year, model_type)
         self.processed_data_files = get_processed_data_files(self.year)
@@ -52,10 +53,83 @@ class QBModelTrainer:
         self.scaler = None
         self.imputer = None
         self.feature_importance = None
+        self.model_loaded = False
         
         logger.info(f"QBModelTrainer initialized for year {self.year}, model type: {self.model_type}")
         logger.info(f"Analysis directory: {self.data_paths['analysis']}")
         logger.info(f"Models directory: {self.data_paths['models']}")
+        logger.info(f"Force retrain: {self.force_retrain}")
+        
+    def model_exists(self) -> bool:
+        """Check if a trained model already exists."""
+        try:
+            model_path = self.model_files['model']
+            label_encoder_path = self.model_files['label_encoder']
+            scaler_path = self.model_files['scaler']
+            imputer_path = self.model_files['imputer']
+            
+            # Check if all required files exist
+            all_exist = all([
+                model_path.exists(),
+                label_encoder_path.exists(),
+                scaler_path.exists(),
+                imputer_path.exists()
+            ])
+            
+            if all_exist:
+                logger.info(f"Existing model found: {model_path}")
+            else:
+                logger.info(f"No existing model found. Missing files:")
+                if not model_path.exists():
+                    logger.info(f"  - Model: {model_path}")
+                if not label_encoder_path.exists():
+                    logger.info(f"  - Label encoder: {label_encoder_path}")
+                if not scaler_path.exists():
+                    logger.info(f"  - Scaler: {scaler_path}")
+                if not imputer_path.exists():
+                    logger.info(f"  - Imputer: {imputer_path}")
+            
+            return all_exist
+            
+        except Exception as e:
+            logger.error(f"Error checking if model exists: {e}")
+            return False
+    
+    def load_existing_model(self) -> bool:
+        """Load an existing trained model and preprocessors."""
+        logger.info("Loading existing model and preprocessors...")
+        
+        try:
+            # Load model and preprocessors
+            self.model = joblib.load(self.model_files['model'])
+            self.label_encoder = joblib.load(self.model_files['label_encoder'])
+            self.scaler = joblib.load(self.model_files['scaler'])
+            self.imputer = joblib.load(self.model_files['imputer'])
+            
+            logger.info(f"Successfully loaded existing model: {self.model}")
+            logger.info(f"Model type: {type(self.model).__name__}")
+            logger.info(f"Number of features: {self.model.n_features_in_}")
+            logger.info(f"Classes: {self.label_encoder.classes_}")
+            
+            self.model_loaded = True
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error loading existing model: {e}")
+            return False
+    
+    def should_retrain(self) -> bool:
+        """Determine if model should be retrained."""
+        if self.force_retrain:
+            logger.info("Force retrain requested - will retrain model")
+            return True
+        
+        if not self.model_exists():
+            logger.info("No existing model found - will train new model")
+            return True
+        
+        logger.info("Existing model found and no force retrain requested - will load existing model")
+        return False
         
     def load_and_prepare_data(self) -> bool:
         """Load and prepare data for model training."""
@@ -426,11 +500,109 @@ class QBModelTrainer:
             logger.error(f"Error analyzing misclassifications: {e}")
             return False
     
+    def calculate_model_score(self, metrics: Dict) -> float:
+        """Calculate a weighted score for model performance comparison."""
+        # Weighted score based on business priorities (recall > precision)
+        recall_weight = 0.4      # Most important (you said recall > precision)
+        accuracy_weight = 0.3    # Overall performance
+        f1_weight = 0.2         # Balance between precision/recall
+        precision_weight = 0.1   # Least important
+        
+        score = (
+            metrics.get('macro_recall', 0) * recall_weight +
+            metrics.get('accuracy', 0) * accuracy_weight +
+            metrics.get('macro_f1', 0) * f1_weight +
+            metrics.get('macro_precision', 0) * precision_weight
+        )
+        return score
+    
+    def evaluate_existing_model(self) -> Dict:
+        """Evaluate the existing model on current test data."""
+        logger.info("Evaluating existing model for comparison...")
+        
+        try:
+            # Load existing model
+            existing_model = joblib.load(self.model_files['model'])
+            existing_label_encoder = joblib.load(self.model_files['label_encoder'])
+            existing_scaler = joblib.load(self.model_files['scaler'])
+            existing_imputer = joblib.load(self.model_files['imputer'])
+            
+            # Preprocess test data with existing preprocessors
+            X_test_processed = existing_imputer.transform(self.X_test)
+            X_test_scaled = existing_scaler.transform(X_test_processed)
+            
+            # Make predictions
+            y_pred = existing_model.predict(X_test_scaled)
+            
+            # Calculate metrics
+            accuracy = accuracy_score(self.y_test, y_pred)
+            macro_recall = recall_score(self.y_test, y_pred, average='macro')
+            macro_precision = recall_score(self.y_test, y_pred, average='macro')
+            macro_f1 = 2 * (macro_precision * macro_recall) / (macro_precision + macro_recall) if (macro_precision + macro_recall) > 0 else 0
+            
+            metrics = {
+                'accuracy': accuracy,
+                'macro_recall': macro_recall,
+                'macro_precision': macro_precision,
+                'macro_f1': macro_f1,
+                'predictions': y_pred
+            }
+            
+            logger.info(f"Existing model metrics - Accuracy: {accuracy:.4f}, Recall: {macro_recall:.4f}")
+            return metrics
+            
+        except Exception as e:
+            logger.error(f"Error evaluating existing model: {e}")
+            return {}
+    
+    def should_overwrite_model(self, new_metrics: Dict) -> bool:
+        """Determine if new model should overwrite existing model."""
+        if not self.model_exists():
+            logger.info("No existing model found - will save new model")
+            return True
+        
+        # Evaluate existing model
+        existing_metrics = self.evaluate_existing_model()
+        if not existing_metrics:
+            logger.warning("Could not evaluate existing model - will save new model")
+            return True
+        
+        # Calculate scores
+        new_score = self.calculate_model_score(new_metrics)
+        existing_score = self.calculate_model_score(existing_metrics)
+        
+        logger.info(f"Model comparison:")
+        logger.info(f"  Existing model score: {existing_score:.4f}")
+        logger.info(f"  New model score: {new_score:.4f}")
+        logger.info(f"  Improvement: {new_score - existing_score:.4f}")
+        
+        # Only overwrite if new model is better (with small threshold to avoid noise)
+        threshold = 0.001  # 0.1% improvement threshold
+        should_overwrite = new_score > (existing_score + threshold)
+        
+        if should_overwrite:
+            logger.info(f"New model performs better - will overwrite existing model")
+        else:
+            logger.info(f"Existing model performs better - keeping existing model")
+        
+        return should_overwrite
+    
     def save_model(self) -> bool:
-        """Save the trained model and preprocessors."""
+        """Save the trained model and preprocessors with smart overwriting."""
         logger.info("Saving model and preprocessors...")
         
         try:
+            # Get current model performance
+            current_metrics = self.evaluate_model()
+            if not current_metrics:
+                logger.error("Could not evaluate current model")
+                return False
+            
+            # Check if we should overwrite existing model
+            if not self.should_overwrite_model(current_metrics):
+                logger.info("Keeping existing model - new model not saved")
+                return True  # Return True since this is successful behavior
+            
             # Get model files for this type
             model_files = self.model_files
             
@@ -451,52 +623,98 @@ class QBModelTrainer:
             return False
     
     def run_full_training_pipeline(self) -> bool:
-        """Run the complete model training pipeline."""
+        """Run the complete model training pipeline with smart loading."""
         logger.info(f"Starting full model training pipeline ({self.model_type})...")
         
         try:
-            # Step 1: Load and prepare data
-            if not self.load_and_prepare_data():
-                return False
-            
-            # Step 2: Preprocess features
-            if not self.preprocess_features():
-                return False
-            
-            # Step 3: Encode labels
-            if not self.encode_labels():
-                return False
-            
-            # Step 4: Split data
-            if not self.split_data():
-                return False
-            
-            # Step 5: Train model
-            if self.model_type == 'recall_optimized':
-                if not self.train_recall_optimized_model():
+            # Check if we should retrain or load existing model
+            if self.should_retrain():
+                # Full training pipeline
+                logger.info("="*60)
+                logger.info("TRAINING NEW MODEL")
+                logger.info("="*60)
+                
+                # Step 1: Load and prepare data
+                if not self.load_and_prepare_data():
                     return False
+                
+                # Step 2: Preprocess features
+                if not self.preprocess_features():
+                    return False
+                
+                # Step 3: Encode labels
+                if not self.encode_labels():
+                    return False
+                
+                # Step 4: Split data
+                if not self.split_data():
+                    return False
+                
+                # Step 5: Train model
+                if self.model_type == 'recall_optimized':
+                    if not self.train_recall_optimized_model():
+                        return False
+                else:
+                    if not self.train_standard_model():
+                        return False
+                
+                # Step 6: Evaluate model
+                results = self.evaluate_model()
+                if not results:
+                    return False
+                
+                # Step 7: Analyze feature importance
+                if not self.analyze_feature_importance():
+                    return False
+                
+                # Step 8: Analyze misclassifications
+                if not self.analyze_misclassifications(results):
+                    return False
+                
+                # Step 9: Save model
+                if not self.save_model():
+                    return False
+                
+                logger.info("Model training pipeline completed successfully!")
+                
             else:
-                if not self.train_standard_model():
+                # Load existing model
+                logger.info("="*60)
+                logger.info("LOADING EXISTING MODEL")
+                logger.info("="*60)
+                
+                # Load existing model
+                if not self.load_existing_model():
                     return False
+                
+                # Load and prepare data for evaluation (needed for feature importance analysis)
+                if not self.load_and_prepare_data():
+                    return False
+                
+                if not self.preprocess_features():
+                    return False
+                
+                if not self.encode_labels():
+                    return False
+                
+                if not self.split_data():
+                    return False
+                
+                # Evaluate loaded model
+                results = self.evaluate_model()
+                if not results:
+                    return False
+                
+                # Analyze feature importance
+                if not self.analyze_feature_importance():
+                    return False
+                
+                # Analyze misclassifications
+                if not self.analyze_misclassifications(results):
+                    return False
+                
+                logger.info("Model loading and evaluation completed successfully!")
             
-            # Step 6: Evaluate model
-            results = self.evaluate_model()
-            if not results:
-                return False
-            
-            # Step 7: Analyze feature importance
-            if not self.analyze_feature_importance():
-                return False
-            
-            # Step 8: Analyze misclassifications
-            if not self.analyze_misclassifications(results):
-                return False
-            
-            # Step 9: Save model
-            if not self.save_model():
-                return False
-            
-            logger.info("Model training pipeline completed successfully!")
             return True
             
         except Exception as e:
