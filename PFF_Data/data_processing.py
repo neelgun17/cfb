@@ -137,7 +137,11 @@ class DataProcessor:
             'short_attempts': 'sum',
             'medium_attempts': 'sum',
             'deep_attempts': 'sum',
-            'behind_los_attempts': 'sum'
+            'behind_los_attempts': 'sum',
+            'deep_accuracy_percent': 'mean',
+            'deep_twp_rate': 'mean',
+            'deep_completions': 'sum',
+            'deep_turnover_worthy_plays': 'sum'
         }).reset_index()
         
         # Calculate total attempts
@@ -154,9 +158,10 @@ class DataProcessor:
         depth_fields['behind_los_attempt_rate'] = np.where(total_attempts > 0, 
                                                          depth_fields['behind_los_attempts'] / total_attempts, 0)
         
-        # Keep only the calculated rates
+        # Keep the calculated rates and deep data
         depth_fields = depth_fields[['player_id', 'short_attempt_rate', 'medium_attempt_rate', 
-                                   'deep_attempt_rate', 'behind_los_attempt_rate']]
+                                   'deep_attempt_rate', 'behind_los_attempt_rate',
+                                   'deep_accuracy_percent', 'deep_twp_rate', 'deep_completions', 'deep_turnover_worthy_plays']]
         
         logger.info(f"Extracted depth fields: {depth_fields.shape}")
         return depth_fields
@@ -323,6 +328,34 @@ class DataProcessor:
                     df_with_features.at[idx, 'rush_attempts_per_game'] = row.get('rush_attempts', 0) / row.get('player_game_count', 0)
                 else:
                     df_with_features.at[idx, 'rush_attempts_per_game'] = np.nan
+                
+                # Completion percentage difference (vs expected)
+                # This is a derived metric - for now using a simple calculation
+                expected_comp_pct = 65.0  # Baseline expectation
+                actual_comp_pct = row.get('completion_percent', 0)
+                df_with_features.at[idx, 'comp_pct_diff'] = actual_comp_pct - expected_comp_pct
+                
+                # Yards per attempt difference (vs expected)
+                expected_ypa = 7.0  # Baseline expectation
+                actual_ypa = row.get('ypa', 0)
+                df_with_features.at[idx, 'ypa_diff'] = actual_ypa - expected_ypa
+                
+                # Deep accuracy percent (from depth data) - use existing value if available
+                if pd.isna(row.get('deep_accuracy_percent', np.nan)):
+                    deep_attempts = row.get('deep_attempts', 0)
+                    deep_completions = row.get('deep_completions', 0)
+                    if deep_attempts > 0:
+                        df_with_features.at[idx, 'deep_accuracy_percent'] = (deep_completions / deep_attempts) * 100
+                    else:
+                        df_with_features.at[idx, 'deep_accuracy_percent'] = np.nan
+                
+                # Deep turnover worthy play rate - use existing value if available
+                if pd.isna(row.get('deep_twp_rate', np.nan)):
+                    deep_attempts = row.get('deep_attempts', 0)
+                    if deep_attempts > 0:
+                        df_with_features.at[idx, 'deep_twp_rate'] = (row.get('deep_turnover_worthy_plays', 0) / deep_attempts) * 100
+                    else:
+                        df_with_features.at[idx, 'deep_twp_rate'] = np.nan
                 
             except Exception as e:
                 logger.warning(f"Error calculating features for row {idx}: {e}")
