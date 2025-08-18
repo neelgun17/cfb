@@ -15,8 +15,8 @@ LABEL_ENCODER_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/bes
 SCALER_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/best_rf_model/archetype_feature_scaler.joblib'
 IMPUTER_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/best_rf_model/archetype_feature_imputer.joblib'
 
-NEW_DATA_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/processed_data_2023/qb_player_merged_summary.csv' # IMPORTANT: Update this path
-OUTPUT_PREDICTIONS_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/analysis_2023/predicted_archetypes_2023.csv' # IMPORTANT: Update
+NEW_DATA_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/processed_data_2024/qb_player_merged_summary.csv' # IMPORTANT: Update this path
+OUTPUT_PREDICTIONS_PATH = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/analysis_2024/predicted_archetypes_2024.csv' # IMPORTANT: Update
 
 # This MUST be the exact same list of raw feature names your model was trained on
 # before any new feature engineering specific to this prediction step.
@@ -52,14 +52,14 @@ except Exception as e:
     print(f"An unexpected error occurred while loading objects: {e}")
     exit()
 
-# --- 2. Load New 2023 Data ---
-print("\n--- 2. Loading New 2023 QB Data ---")
+# --- 2. Load New 2024 Data ---
+print("\n--- 2. Loading New 2024 QB Data ---")
 try:
     df_new_data = pd.read_csv(NEW_DATA_PATH)
     # Basic cleaning of column names if needed (mirroring training script)
     df_new_data.columns = df_new_data.columns.str.rstrip('_')
     df_new_data.rename(columns=lambda c: c.replace('.', '_'), inplace=True)
-    print(f"Loaded 2023 data with shape: {df_new_data.shape}")
+    print(f"Loaded 2024 data with shape: {df_new_data.shape}")
 except FileNotFoundError:
     print(f"Error: New data file not found at {NEW_DATA_PATH}")
     exit()
@@ -67,8 +67,8 @@ except Exception as e:
     print(f"An unexpected error occurred while loading new data: {e}")
     exit()
 
-# --- 3. Preprocess the 2023 Data ---
-print("\n--- 3. Preprocessing 2023 Data ---")
+# --- 3. Preprocess the 2024 Data ---
+print("\n--- 3. Preprocessing 2024 Data ---")
 
 # Make a copy to avoid modifying the original loaded DataFrame
 df_new_data_processed = df_new_data.copy()
@@ -81,7 +81,7 @@ if 'dropbacks' in df_new_data_processed.columns:
         df_new_data_processed['dropbacks'] = pd.to_numeric(df_new_data_processed['dropbacks'], errors='coerce')
         df_new_data_filtered = df_new_data_processed[df_new_data_processed["dropbacks"].notna() & (df_new_data_processed["dropbacks"].astype(int) >= 125)].copy()
         if df_new_data_filtered.empty:
-            print("Warning: No players in the 2023 data meet the dropback filter criteria.")
+            print("Warning: No players in the 2024 data meet the dropback filter criteria.")
             exit()
         print(f"Shape after dropback filter: {df_new_data_filtered.shape}")
     except Exception as e:
@@ -124,14 +124,14 @@ print("Applying loaded scaler...")
 X_new_scaled_array = scaler.transform(X_new_imputed_df)   # Use .transform() NOT .fit_transform()
 X_new_scaled = pd.DataFrame(X_new_scaled_array, columns=RAW_FEATURES_FOR_MODEL, index=X_new_imputed_df.index)
 
-print(f"Shape of preprocessed 2023 features for prediction (X_new_scaled): {X_new_scaled.shape}")
+print(f"Shape of preprocessed 2024 features for prediction (X_new_scaled): {X_new_scaled.shape}")
 
 if X_new_scaled.empty:
     print("Error: No data remains after preprocessing. Cannot make predictions.")
     exit()
 
 # --- 4. Make Predictions ---
-print("\n--- 4. Making Predictions on 2023 Data ---")
+print("\n--- 4. Making Predictions on 2024 Data ---")
 try:
     predictions_encoded = model.predict(X_new_scaled)
 except Exception as e:
@@ -149,8 +149,8 @@ except Exception as e:
     predictions_names = [f"Encoded_{p}" for p in predictions_encoded]
 
 
-# --- 6. Analyze and Store 2023 Predictions ---
-print("\n--- 6. Analyzing and Storing 2023 Predictions ---")
+# --- 6. Analyze and Store 2024 Predictions ---
+print("\n--- 6. Analyzing and Storing 2024 Predictions ---")
 
 # Add predictions to the identifier DataFrame
 # Ensure indices align if df_new_data_identifiers was subsetted
@@ -159,70 +159,70 @@ df_predictions_output = df_new_data_identifiers.loc[X_new_scaled.index].copy() #
 df_predictions_output['predicted_archetype_encoded'] = predictions_encoded
 df_predictions_output['predicted_archetype_name'] = predictions_names
 
-print("\nDistribution of Predicted Archetypes for 2023 Season:")
+print("\nDistribution of Predicted Archetypes for 2024 Season:")
 print(df_predictions_output['predicted_archetype_name'].value_counts())
 
-print("\nFirst few 2023 players with their predicted archetypes:")
+print("\nFirst few 2024 players with their predicted archetypes:")
 print(df_predictions_output.head())
 
-# Optional: Spot-check some well-known QBs from 2023 if you know their IDs or names
+# Optional: Spot-check some well-known QBs from 2024 if you know their IDs or names
 # Example:
-# joe_burrow_2023 = df_predictions_output[df_predictions_output['player'] == 'Joe Burrow'] # Adjust if name format differs
-# if not joe_burrow_2023.empty:
-#     print("\nJoe Burrow (2023) Predicted Archetype:")
-#     print(joe_burrow_2023[['player', 'team_name', 'predicted_archetype_name']])
+# joe_burrow_2024 = df_predictions_output[df_predictions_output['player'] == 'Joe Burrow'] # Adjust if name format differs
+# if not joe_burrow_2024.empty:
+#     print("\nJoe Burrow (2024) Predicted Archetype:")
+#     print(joe_burrow_2024[['player', 'team_name', 'predicted_archetype_name']])
 
-# --- 7. Save the 2023 Data with Predicted Archetypes ---
-print("\n--- 7. Saving 2023 Predictions ---")
+# --- 7. Save the 2024 Data with Predicted Archetypes ---
+print("\n--- 7. Saving 2024 Predictions ---")
 try:
     df_predictions_output.to_csv(OUTPUT_PREDICTIONS_PATH, index=False)
-    print(f"2023 predictions saved to: {OUTPUT_PREDICTIONS_PATH}")
+    print(f"2024 predictions saved to: {OUTPUT_PREDICTIONS_PATH}")
 except Exception as e:
     print(f"Error saving predictions CSV: {e}")
 
 print("\n--- Script Finished ---")
-print("\n\n--- Starting Comparison with 2023 Clustered Archetypes ---")
+print("\n\n--- Starting Comparison with 2024 Clustered Archetypes ---")
 
-# Define the path to your file containing 2023 stats WITH archetypes derived from CLUSTERING 2023 data
-PATH_TO_2023_CLUSTERED_ARCHETYPES = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/analysis_2023/merged_summary_with_archetypes.csv'
+# Define the path to your file containing 2024 stats WITH archetypes derived from CLUSTERING 2024 data
+PATH_TO_2024_CLUSTERED_ARCHETYPES = '/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data/analysis_2024/merged_summary_with_archetypes.csv'
 # Define column names for clarity (these should match your actual CSV headers)
 PLAYER_ID_COL_IN_BOTH = 'player_id' # Must be common and unique identifier
-TRUE_ARCHETYPE_COL_2023 = 'archetype_name' # Column name in your 2023 clustered file
+TRUE_ARCHETYPE_COL_2024 = 'archetype_name' # Column name in your 2024 clustered file
 PREDICTED_ARCHETYPE_COL_FROM_MODEL = 'predicted_archetype_name' # Column name in df_predictions_output
 
 try:
-    df_true_2023_clustered = pd.read_csv(PATH_TO_2023_CLUSTERED_ARCHETYPES)
-    print(f"Loaded 2023 clustered data (true labels) with shape: {df_true_2023_clustered.shape}")
+    df_true_2024_clustered = pd.read_csv(PATH_TO_2024_CLUSTERED_ARCHETYPES)
+print(f"Loaded 2024 clustered data (true labels) with shape: {df_true_2024_clustered.shape}")
 
-    # Ensure necessary columns exist
-    if PLAYER_ID_COL_IN_BOTH not in df_true_2023_clustered.columns or \
-       TRUE_ARCHETYPE_COL_2023 not in df_true_2023_clustered.columns:
-        raise ValueError(f"Missing key columns in 2023 clustered data file: {PATH_TO_2023_CLUSTERED_ARCHETYPES}")
+# Ensure necessary columns exist
+if PLAYER_ID_COL_IN_BOTH not in df_true_2024_clustered.columns or \
+   TRUE_ARCHETYPE_COL_2024 not in df_true_2024_clustered.columns:
+    raise ValueError(f"Missing key columns in 2024 clustered data file: {PATH_TO_2024_CLUSTERED_ARCHETYPES}")
 
     if PLAYER_ID_COL_IN_BOTH not in df_predictions_output.columns or \
        PREDICTED_ARCHETYPE_COL_FROM_MODEL not in df_predictions_output.columns:
         raise ValueError("Missing key columns in df_predictions_output.")
 
 except FileNotFoundError:
-    print(f"Error: 2023 clustered data file not found at {PATH_TO_2023_CLUSTERED_ARCHETYPES}")
+    print(f"Error: 2024 clustered data file not found at {PATH_TO_2024_CLUSTERED_ARCHETYPES}")
     exit()
 except ValueError as e:
     print(e)
     exit()
 
 
-# --- Merge based on Player ID to align true 2023 archetypes with model predictions ---
+# --- Merge based on Player ID to align true 2024 archetypes with model predictions ---
 # Select only necessary columns to avoid duplicate stat columns
 # The df_predictions_output already contains identifiers from the prediction script
 df_for_comparison = pd.merge(
     df_predictions_output[[PLAYER_ID_COL_IN_BOTH, 'player', 'team_name', PREDICTED_ARCHETYPE_COL_FROM_MODEL]], # Assuming 'player', 'team_name' are in df_predictions_output
-    df_true_2023_clustered[[PLAYER_ID_COL_IN_BOTH, TRUE_ARCHETYPE_COL_2023]],
+    df_true_2024_clustered[[PLAYER_ID_COL_IN_BOTH, TRUE_ARCHETYPE_COL_2024]],
     on=PLAYER_ID_COL_IN_BOTH,
     how='inner' # Only compare players present in both and meeting all filters
 )
 
 if df_for_comparison.empty:
-    print("Error: No common players found after merging predicted and true 2023 archetypes. Check filters and player_id consistency.")
+    print("Error: No common players found after merging predicted and true 2024 archetypes. Check filters and player_id consistency.")
     exit()
 
 print(f"\nNumber of players for comparison after merge: {len(df_for_comparison)}")
@@ -230,22 +230,22 @@ print("Sample of merged data for comparison:")
 print(df_for_comparison.head())
 
 # --- Prepare labels for scikit-learn metrics ---
-y_true_2023_names = df_for_comparison[TRUE_ARCHETYPE_COL_2023]
-y_pred_2023_names = df_for_comparison[PREDICTED_ARCHETYPE_COL_FROM_MODEL]
+y_true_2024_names = df_for_comparison[TRUE_ARCHETYPE_COL_2024]
+y_pred_2024_names = df_for_comparison[PREDICTED_ARCHETYPE_COL_FROM_MODEL]
 
 # Ensure archetype names are consistent for encoding.
 # The label_encoder loaded earlier was fit on the 2024 archetypes.
-# If 2023 clustered archetypes use slightly different names or have a different set,
+# If 2024 clustered archetypes use slightly different names or have a different set,
 # this loaded label_encoder might fail or misinterpret.
 # It's safer to fit a new one based on the actual names present in this comparison,
-# or rigorously ensure your 2023 clustering process uses the exact same final archetype string names.
+# or rigorously ensure your 2024 clustering process uses the exact same final archetype string names.
 
 # Using the loaded label_encoder (assuming names are consistent from your 2024 training)
 # This label_encoder was loaded at the beginning of predict_new_data.py
 # label_encoder: LabelEncoder = joblib.load(LABEL_ENCODER_PATH)
 
 # OR, for more robustness if names MIGHT differ slightly or if one set has names the other doesn't:
-all_names_in_comparison = pd.concat([y_true_2023_names, y_pred_2023_names]).astype(str).unique() # astype(str) to handle potential mixed types
+all_names_in_comparison = pd.concat([y_true_2024_names, y_pred_2024_names]).astype(str).unique() # astype(str) to handle potential mixed types
 all_names_in_comparison.sort()
 comparison_label_encoder = LabelEncoder()
 comparison_label_encoder.fit(all_names_in_comparison)
@@ -253,45 +253,45 @@ print(f"Comparison Label Encoder Classes: {comparison_label_encoder.classes_}")
 
 
 try:
-    y_true_2023_encoded = comparison_label_encoder.transform(y_true_2023_names.astype(str))
-    y_pred_2023_encoded = comparison_label_encoder.transform(y_pred_2023_names.astype(str))
+    y_true_2024_encoded = comparison_label_encoder.transform(y_true_2024_names.astype(str))
+    y_pred_2024_encoded = comparison_label_encoder.transform(y_pred_2024_names.astype(str))
 except ValueError as e:
     print(f"ValueError during label encoding for comparison: {e}")
-    print("This often means an archetype name in the 2023 data (either true or predicted) was not seen during fitting the comparison_label_encoder.")
-    print(f"Unique True 2023 Archetypes: {y_true_2023_names.unique()}")
-    print(f"Unique Predicted 2023 Archetypes by Model: {y_pred_2023_names.unique()}")
+    print("This often means an archetype name in the 2024 data (either true or predicted) was not seen during fitting the comparison_label_encoder.")
+    print(f"Unique True 2024 Archetypes: {y_true_2024_names.unique()}")
+    print(f"Unique Predicted 2024 Archetypes by Model: {y_pred_2024_names.unique()}")
     print(f"Classes learned by comparison_label_encoder: {comparison_label_encoder.classes_}")
     exit()
 
 # --- Calculate and Display Metrics ---
-accuracy_2023_eval = accuracy_score(y_true_2023_encoded, y_pred_2023_encoded)
-report_2023_eval = classification_report(y_true_2023_encoded, y_pred_2023_encoded,
+accuracy_2024_eval = accuracy_score(y_true_2024_encoded, y_pred_2024_encoded)
+report_2024_eval = classification_report(y_true_2024_encoded, y_pred_2024_encoded,
                                          target_names=comparison_label_encoder.classes_, zero_division=0)
 # Ensure labels for confusion matrix cover all classes in the encoder for consistent plotting
 cm_labels_ordered = np.arange(len(comparison_label_encoder.classes_))
-cm_2023_eval = confusion_matrix(y_true_2023_encoded, y_pred_2023_encoded, labels=cm_labels_ordered)
+cm_2024_eval = confusion_matrix(y_true_2024_encoded, y_pred_2024_encoded, labels=cm_labels_ordered)
 
-print(f"\n--- Evaluation: 2024 Model Predictions vs. 2023 Clustered Archetypes ---")
-print(f"Overall Accuracy: {accuracy_2023_eval:.4f}")
+print(f"\n--- Evaluation: 2024 Model Predictions vs. 2024 Clustered Archetypes ---")
+print(f"Overall Accuracy: {accuracy_2024_eval:.4f}")
 print("\nClassification Report:")
-print(report_2023_eval)
+print(report_2024_eval)
 print("\nConfusion Matrix:")
 plt.figure(figsize=(10, 7)) # Adjusted figure size for better label display
-sns.heatmap(cm_2023_eval, annot=True, fmt='d', cmap='Blues',
+sns.heatmap(cm_2024_eval, annot=True, fmt='d', cmap='Blues',
             xticklabels=comparison_label_encoder.classes_,
             yticklabels=comparison_label_encoder.classes_)
-plt.title('2024 Model Predictions vs. 2023 Clustered Archetypes')
+plt.title('2024 Model Predictions vs. 2024 Clustered Archetypes')
 plt.xlabel('Predicted Archetype (by 2024 Model)')
-plt.ylabel('True Archetype (from 2023 Clustering)')
+plt.ylabel('True Archetype (from 2024 Clustering)')
 plt.tight_layout() # Adjust layout
 plt.show()
 
 # --- Show misclassified players for this comparison ---
-df_for_comparison['correctly_classified'] = (y_true_2023_names == y_pred_2023_names)
+df_for_comparison['correctly_classified'] = (y_true_2024_names == y_pred_2024_names)
 misclassified_in_comparison = df_for_comparison[~df_for_comparison['correctly_classified']]
 
-print("\n--- Players Where 2024 Model's Prediction Differs from 2023 Clustering ---")
+print("\n--- Players Where 2024 Model's Prediction Differs from 2024 Clustering ---")
 if not misclassified_in_comparison.empty:
-    print(misclassified_in_comparison[['player', 'team_name', TRUE_ARCHETYPE_COL_2023, PREDICTED_ARCHETYPE_COL_FROM_MODEL]])
+    print(misclassified_in_comparison[['player', 'team_name', TRUE_ARCHETYPE_COL_2024, PREDICTED_ARCHETYPE_COL_FROM_MODEL]])
 else:
-    print("No discrepancies found between model predictions and 2023 clustered archetypes (for common players).")
+    print("No discrepancies found between model predictions and 2024 clustered archetypes (for common players).")

@@ -6,48 +6,34 @@ A modular, production-ready pipeline for analyzing quarterback archetypes using 
 
 ```
 PFF_Data/
+├── main_pipeline.py          # Main orchestration script
+├── pipeline_steps.py         # Individual pipeline step classes
+├── pipeline_summary.py       # Pipeline summary and reporting
 ├── config.py                 # Central configuration and parameters
 ├── data_processing.py        # Data cleaning and feature engineering
-├── clustering.py            # Clustering analysis and archetype discovery
-├── model_training.py        # Classification model training
-├── main_pipeline.py         # Main orchestration script
-├── README.md               # This file
-├── requirements.txt        # Python dependencies
+├── clustering.py             # Clustering analysis and archetype discovery
+├── model_training.py         # Classification model training
+├── enhanced_api.py           # Enhanced REST API with AI analysis
+├── ai_analysis_service.py    # Qwen3:8B LLM-based AI analysis
+├── lightweight_ai_analyzer.py # Rule-based AI analysis service
+├── switch_ai_analyzer.py     # AI analyzer switching utility
+├── test_ai_integration.py    # AI integration tests
+├── README.md                 # This file
+├── requirements.txt          # Python dependencies
 │
-├── raw_data/              # Raw CSV files from PFF
-│   ├── passing_summary.csv
-│   ├── rushing_summary.csv
-│   ├── passing_concept.csv
-│   ├── passing_depth.csv
-│   ├── passing_pressure.csv
-│   └── time_in_pocket.csv
+├── data/                     # Data directory (year-based structure)
+│   ├── raw/                  # Raw PFF CSV files
+│   │   └── 2024/            # Year-specific raw data
+│   ├── processed/            # Cleaned and merged data
+│   │   └── 2024/            # Year-specific processed data
+│   └── analysis/             # Analysis results
+│       └── 2024/            # Year-specific analysis results
 │
-├── processed_data/         # Cleaned and processed data
-│   ├── qb_player_merged_summary.csv
-│   ├── qb_player_summary.csv
-│   ├── qb_player_rushing_summary.csv
-│   └── ...
+├── models/                   # Trained models
+│   └── single_year/         # Year-specific models
+│       └── 2024/            # Models for 2024
 │
-├── analysis/              # Clustering results and analysis
-│   ├── hierarchical_player_assignments_k4.csv
-│   ├── hierarchical_profiles_k4.csv
-│   ├── cluster_data_scaled_df.csv
-│   ├── feature_importance.png
-│   └── archetype_distribution.png
-│
-├── models/                # Trained models
-│   ├── recall_optimized/
-│   │   ├── recall_optimized_qb_archetype_rf_model.joblib
-│   │   ├── recall_archetype_label_encoder.joblib
-│   │   ├── recall_archetype_feature_scaler.joblib
-│   │   └── recall_archetype_feature_imputer.joblib
-│   └── standard/
-│       ├── best_qb_archetype_rf_model.joblib
-│       └── ...
-│
-├── validation_data/       # Validation datasets
-├── results/              # Final results and reports
-└── logs/                 # Pipeline logs
+└── logs/                     # Pipeline logs
 ```
 
 ## 🚀 Quick Start
@@ -57,33 +43,271 @@ PFF_Data/
 ```bash
 # Install dependencies
 pip install -r requirements.txt
-
-# Run configuration to create directories
-python config.py
 ```
 
 ### 2. Run Full Pipeline
 
 ```bash
-# Run the complete pipeline (data processing → clustering → model training)
-python main_pipeline.py --step full
+# Run the complete pipeline (default year 2024)
+python main_pipeline.py
+
+# Run for a specific year
+python main_pipeline.py --year 2024
 
 # Run with specific models
-python main_pipeline.py --step full --models recall_optimized standard
+python main_pipeline.py --models recall_optimized standard --year 2024
+
+# Force retrain models (ignore existing models)
+python main_pipeline.py --force-retrain --year 2024
 ```
 
 ### 3. Run Individual Steps
 
 ```bash
 # Data processing only
-python main_pipeline.py --step data_processing
+python main_pipeline.py --step data_processing --year 2024
 
 # Clustering only
-python main_pipeline.py --step clustering
+python main_pipeline.py --step clustering --year 2024
 
 # Model training only
-python main_pipeline.py --step model_training --models recall_optimized
+python main_pipeline.py --step model_training --year 2024
+
+
 ```
+
+### 4. Advanced Options
+
+```bash
+# Train both recall-optimized and standard models
+python main_pipeline.py --models recall_optimized standard --year 2024
+
+# Train only standard model
+python main_pipeline.py --models standard --year 2024
+
+# Run with debug logging
+python main_pipeline.py --log-level DEBUG --year 2024
+
+# Run with minimal logging
+python main_pipeline.py --log-level WARNING --year 2024
+```
+
+### 5. Enhanced QB Archetype Prediction API
+
+The project includes a comprehensive REST API for QB archetype analysis with both **player lookup** and **stats-based prediction** capabilities:
+
+#### Features
+- **Player Lookup**: Find archetypes for existing players in the dataset
+- **Stats-based Prediction**: Predict archetypes for new/unknown QBs or hypothetical scenarios
+- **Player Search**: Search for players by name with partial matching
+- **Analytics**: Get archetype distributions and top players by archetype
+- **Batch Processing**: Predict archetypes for multiple QBs at once
+
+#### Start the Enhanced API
+```bash
+python3 enhanced_api.py
+```
+
+#### Test the Enhanced API
+```bash
+python3 test_enhanced_api.py
+```
+
+#### Example Usage
+```bash
+python3 enhanced_example_usage.py
+```
+
+#### API Endpoints
+- `GET /health` - Health check and model status
+- `GET /features` - Get required features for prediction
+- `GET /models` - Get model information
+- `GET /search?q={query}` - Search for players by name
+- `GET /archetypes/distribution` - Get archetype distribution
+- `GET /archetypes/top-players` - Get top players by archetype
+- `POST /predict` - Predict archetype from stats
+- `POST /predict/batch` - Batch prediction for multiple QBs
+- `POST /compare` - Compare two QBs (with optional AI analysis)
+- `GET /ai/config` - Get AI analyzer configuration
+- `POST /ai/config` - Set AI analyzer configuration
+- `POST /analyze/ai/qb` - AI-powered individual QB analysis
+- `POST /compare/ai` - AI-powered QB comparison
+- `POST /analyze/ai/strategy` - AI-powered strategic insights
+
+For detailed API documentation, see [ENHANCED_API_DOCUMENTATION.md](ENHANCED_API_DOCUMENTATION.md).
+
+## 🤖 AI-Powered QB Analysis
+
+The project now includes **intelligent AI-powered analysis** that provides deep insights into quarterback performance using rule-based statistical analysis and archetype comparisons.
+
+### 🧠 AI Analysis Features
+
+#### 1. **Individual QB Performance Analysis**
+Get comprehensive analysis of any quarterback's performance relative to their archetype:
+
+- **Archetype Fit Analysis**: How well the QB matches their archetype (with percentage scores)
+- **Performance Strengths**: Identifies superior statistical performance areas
+- **Performance Weaknesses**: Highlights areas of concern and improvement opportunities
+- **Strategic Insights**: Provides actionable defensive and offensive strategies
+
+#### 2. **AI-Powered QB Comparison**
+Compare two quarterbacks with intelligent statistical analysis:
+
+- **Key Statistical Differences**: Identifies significant performance gaps
+- **Strategic Implications**: Provides game-planning insights
+- **Head-to-Head Analysis**: Detailed comparison of strengths and weaknesses
+
+#### 3. **Strategic Insights**
+Generate game-specific strategic recommendations:
+
+- **Offensive Strategy**: Tailored play-calling recommendations
+- **Defensive Strategy**: How to approach defending against the QB
+- **Situational Analysis**: Critical situation handling recommendations
+
+### 🤖 Dual AI Analyzer Options
+
+The system supports two AI analyzer types that you can switch between:
+
+#### ⚡ Lightweight Analyzer (Default)
+- **Speed**: Instant (milliseconds)
+- **Quality**: Consistent, statistical insights
+- **Best for**: Real-time API usage, multiple concurrent requests
+- **Type**: Rule-based analysis using statistical deviations
+
+#### 🧠 Qwen3:8B Analyzer
+- **Speed**: Slow (60-120 seconds)
+- **Quality**: Nuanced, natural language insights
+- **Best for**: Detailed analysis, one-off deep dives
+- **Type**: Large Language Model (Qwen3:8B via Ollama)
+
+### 🔄 Switching Between Analyzers
+
+**Option 1: Configuration File**
+```bash
+# Edit config.py and change:
+AI_ANALYZER_TYPE = "lightweight"  # or "qwen"
+# Then restart the API
+```
+
+**Option 2: Convenience Script**
+```bash
+# Check current analyzer
+python3 switch_ai_analyzer.py status
+
+# Switch to lightweight (fast)
+python3 switch_ai_analyzer.py lightweight
+
+# Switch to Qwen (detailed)
+python3 switch_ai_analyzer.py qwen
+```
+
+**Option 3: API Endpoint**
+```bash
+# Check configuration
+curl -X GET http://localhost:5001/ai/config
+
+# Set configuration (requires restart)
+curl -X POST http://localhost:5001/ai/config \
+  -H "Content-Type: application/json" \
+  -d '{"analyzer_type": "qwen"}'
+```
+
+### 🚀 AI Analysis Endpoints
+
+#### Individual QB Analysis
+```bash
+curl -X POST http://localhost:5001/analyze/ai/qb \
+  -H "Content-Type: application/json" \
+  -d '{"qb_name": "Dillon Gabriel"}'
+```
+
+#### QB Comparison
+```bash
+curl -X POST http://localhost:5001/compare/ai \
+  -H "Content-Type: application/json" \
+  -d '{"qb1": "Dillon Gabriel", "qb2": "Will Howard"}'
+```
+
+#### Strategic Insights
+```bash
+curl -X POST http://localhost:5001/analyze/ai/strategy \
+  -H "Content-Type: application/json" \
+  -d '{"qb_name": "Dillon Gabriel", "context": "upcoming_game_against_strong_pass_rush"}'
+```
+
+#### Enhanced Comparison (with AI)
+```bash
+curl -X POST http://localhost:5001/compare \
+  -H "Content-Type: application/json" \
+  -d '{"qb1": "Dillon Gabriel", "qb2": "Will Howard", "include_ai": true}'
+```
+
+### 📊 Example AI Analysis Output
+
+#### Individual QB Analysis
+```
+# AI Analysis: Dillon Gabriel (OREGON)
+
+**Archetype**: Pocket Managers
+
+**Archetype Fit Analysis**
+QB shows **Good** alignment with the Pocket Managers archetype (67% fit).
+
+**Key Deviations:**
+• Accuracy Percent: 81.9 (above archetype avg by 9.2%)
+• Scramble Rate: 0.0 (below archetype avg by 99.3%)
+• Pressure Accuracy Percent: 67.8 (above archetype avg by 8.6%)
+
+**Performance Strengths**
+• **Superior Accuracy**: 81.9% (above archetype average)
+• **Strong Pressure Handling**: 67.8% accuracy under pressure
+• **Elite Passing Grade**: PFF Pass Grade of 86.3
+• **Efficient Decision Making**: TD/INT ratio of 5.0
+
+**Strategic Insights**
+• **Defensive Strategy**: Focus on coverage over pressure - QB is highly accurate
+• **Offensive Strategy**: Emphasize quick, accurate passing game
+```
+
+#### QB Comparison
+```
+# AI Comparison: Dillon Gabriel vs Will Howard
+
+**Key Statistical Differences**
+• **Pressure Handling**: Will Howard (+5.4%)
+• **Efficiency**: Dillon Gabriel (+1.5 TD/INT ratio)
+
+**Strategic Implications**
+• Defenses should pressure Dillon Gabriel more aggressively
+```
+
+### ⚡ Performance Benefits
+
+- **Instant Response**: No more 30-120 second timeouts
+- **Resource Efficient**: Uses minimal CPU/memory
+- **Reliable**: No external service dependencies
+- **Scalable**: Can handle multiple requests simultaneously
+- **Intelligent**: Rule-based analysis with statistical significance
+
+### 🔧 Technical Implementation
+
+- **Statistical Analysis**: Compares QB stats to archetype averages
+- **Rule-Based Logic**: Uses predefined thresholds for significance
+- **Error Handling**: Robust error handling and logging
+- **Integration**: Seamlessly integrated with existing Flask API
+
+### 🧪 Testing AI Features
+
+Test all AI functionality:
+```bash
+python3 test_ai_integration.py
+```
+
+This will test:
+- ✅ Individual QB analysis
+- ✅ QB comparison
+- ✅ Strategic insights
+- ✅ Enhanced comparison with AI
 
 ## 📋 Pipeline Steps
 
@@ -108,10 +332,49 @@ python main_pipeline.py --step model_training --models recall_optimized
 ### 3. Model Training (`model_training.py`)
 - **Input**: QB data with archetype labels
 - **Process**:
-  - Train Random Forest classifiers
-  - Hyperparameter optimization
-  - Model evaluation and analysis
+  - **Smart Loading**: Check if trained models already exist
+  - **Conditional Training**: Only retrain if models don't exist or `--force-retrain` is used
+  - **Grid Search**: Hyperparameter optimization (when training)
+  - **Model Evaluation**: Performance analysis and feature importance
 - **Output**: Trained models for archetype prediction
+
+### 4. Final Merged CSV Creation
+- **Input**: Processed QB data + archetype assignments
+- **Process**:
+  - Merge all statistical features with archetype labels
+  - Filter to players with ≥150 dropbacks
+  - Reorder columns for optimal analysis
+- **Output**: Complete dataset with all stats and archetypes (`final_merged_qb_data_with_archetypes.csv`)
+
+## 🧠 Smart Model Loading
+
+The pipeline includes intelligent model management to save time and computational resources:
+
+### How It Works
+1. **Model Check**: Before training, the pipeline checks if trained models already exist
+2. **Conditional Training**: 
+   - If models exist → Load existing models (fast)
+   - If models don't exist → Train new models (slow)
+   - If `--force-retrain` is used → Always train new models
+3. **Evaluation**: Always runs model evaluation and analysis regardless of loading method
+
+### Benefits
+- **Time Savings**: Skip expensive grid search when models already exist
+- **Consistency**: Use the same best-performing models across runs
+- **Control**: Force retraining when needed with `--force-retrain` flag
+- **Reliability**: Always get model evaluation results
+
+### Usage Examples
+```bash
+# First run - trains new models (slow)
+python main_pipeline.py --year 2023
+
+# Subsequent runs - loads existing models (fast)
+python main_pipeline.py --year 2023
+
+# Force retrain - ignores existing models (slow)
+python main_pipeline.py --force-retrain --year 2023
+```
 
 ## 🎯 QB Archetypes
 
@@ -172,30 +435,38 @@ MODEL_PARAMS = {
 
 ### Basic Usage
 ```bash
-# Run everything
+# Run everything (default year 2023)
 python main_pipeline.py
 
+# Run for a specific year
+python main_pipeline.py --year 2023
+
 # Run with verbose logging
-python main_pipeline.py --log-level DEBUG
+python main_pipeline.py --log-level DEBUG --year 2023
 ```
 
 ### Advanced Usage
 ```bash
 # Train only recall-optimized model
-python main_pipeline.py --step model_training --models recall_optimized
+python main_pipeline.py --step model_training --models recall_optimized --year 2023
+
+# Force retrain a specific model (ignore existing model)
+python main_pipeline.py --step model_training --models recall_optimized --force-retrain --year 2023
 
 # Run clustering with custom parameters (edit config.py first)
-python main_pipeline.py --step clustering
+python main_pipeline.py --step clustering --year 2023
+
+# Train both model types
+python main_pipeline.py --models recall_optimized standard --year 2023
 ```
 
-### Validation
+### Most Common Usage
 ```bash
-# Use the feature importance analysis script
-python feature_importance_analysis.py
-
-# Use the recall-optimized classification script
-python recall_optimized_classification.py
+# For typical workflow (recommended)
+python main_pipeline.py --year 2024
 ```
+
+This will run the full pipeline (data processing → clustering → model training) with recall-optimized models for 2024 data.
 
 ## 📈 Results Interpretation
 
