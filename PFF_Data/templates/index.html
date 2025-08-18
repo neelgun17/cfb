@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QB Archetype Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .spinner-border {
+            color: #667eea;
+        }
+        .ai-toggle {
+            background: #e9ecef;
+            border-radius: 25px;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .ai-toggle .btn {
+            border-radius: 20px;
+            border: none;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        .ai-toggle .btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .stat-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="main-container">
+                    <!-- Header -->
+                    <div class="header text-center">
+                        <h1><i class="fas fa-football-ball me-3"></i>QB Archetype Analysis</h1>
+                        <p class="mb-0">Advanced quarterback analysis powered by AI and machine learning</p>
+                    </div>
+
+                    <!-- AI Analyzer Toggle -->
+                    <div class="p-4">
+                        <div class="ai-toggle text-center">
+                            <span class="me-3">AI Analyzer:</span>
+                            <button class="btn btn-outline-secondary" id="lightweightBtn" onclick="switchAnalyzer('lightweight')">
+                                <i class="fas fa-bolt me-1"></i>Lightweight
+                            </button>
+                            <button class="btn btn-outline-secondary" id="qwenBtn" onclick="switchAnalyzer('qwen')">
+                                <i class="fas fa-brain me-1"></i>Qwen3:8B
+                            </button>
+                        </div>
+                        <div id="analyzerStatus" class="text-center mb-3">
+                            <small class="text-muted">Current: <span id="currentAnalyzer">Lightweight</span></small>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="p-4">
+                        <div class="row">
+                            <!-- Individual QB Analysis -->
+                            <div class="col-md-6">
+                                <div class="feature-card p-4">
+                                    <h4><i class="fas fa-user me-2"></i>Individual QB Analysis</h4>
+                                    <form id="qbAnalysisForm">
+                                        <div class="mb-3">
+                                            <label for="qbName" class="form-label">QB Name</label>
+                                            <input type="text" class="form-control" id="qbName" placeholder="e.g., Dillon Gabriel" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-search me-2"></i>Analyze QB
+                                        </button>
+                                    </form>
+                                    <div id="qbLoading" class="loading">
+                                        <div class="spinner-border" role="status"></div>
+                                        <p class="mt-2">Analyzing QB performance...</p>
+                                    </div>
+                                    <div id="qbResult"></div>
+                                </div>
+                            </div>
+
+                            <!-- QB Comparison -->
+                            <div class="col-md-6">
+                                <div class="feature-card p-4">
+                                    <h4><i class="fas fa-balance-scale me-2"></i>QB Comparison</h4>
+                                    <form id="comparisonForm">
+                                        <div class="mb-3">
+                                            <label for="qb1Name" class="form-label">QB 1</label>
+                                            <input type="text" class="form-control" id="qb1Name" placeholder="e.g., Dillon Gabriel" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="qb2Name" class="form-label">QB 2</label>
+                                            <input type="text" class="form-control" id="qb2Name" placeholder="e.g., Will Howard" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="includeAI" checked>
+                                                <label class="form-check-label" for="includeAI">
+                                                    Include AI Analysis
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-chart-line me-2"></i>Compare QBs
+                                        </button>
+                                    </form>
+                                    <div id="comparisonLoading" class="loading">
+                                        <div class="spinner-border" role="status"></div>
+                                        <p class="mt-2">Comparing QBs...</p>
+                                    </div>
+                                    <div id="comparisonResult"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strategic Analysis -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="feature-card p-4">
+                                    <h4><i class="fas fa-chess me-2"></i>Strategic Analysis</h4>
+                                    <form id="strategyForm">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="strategyQB" class="form-label">QB Name</label>
+                                                <input type="text" class="form-control" id="strategyQB" placeholder="e.g., Dillon Gabriel" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="scenario" class="form-label">Scenario</label>
+                                                <select class="form-select" id="scenario" required>
+                                                    <option value="">Select scenario...</option>
+                                                    <option value="red_zone">Red Zone Offense</option>
+                                                    <option value="two_minute_drill">Two-Minute Drill</option>
+                                                    <option value="third_down">Third Down Situations</option>
+                                                    <option value="play_action">Play Action Passing</option>
+                                                    <option value="pressure_situations">Pressure Situations</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label">&nbsp;</label>
+                                                <button type="submit" class="btn btn-primary w-100">
+                                                    <i class="fas fa-lightbulb me-2"></i>Get Strategy
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div id="strategyLoading" class="loading">
+                                        <div class="spinner-border" role="status"></div>
+                                        <p class="mt-2">Generating strategic insights...</p>
+                                    </div>
+                                    <div id="strategyResult"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Status -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="feature-card p-4">
+                                    <h4><i class="fas fa-server me-2"></i>System Status</h4>
+                                    <div class="stats-grid">
+                                        <div class="stat-item">
+                                            <div class="stat-value" id="apiStatus">Checking...</div>
+                                            <div class="stat-label">API Status</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value" id="modelStatus">Checking...</div>
+                                            <div class="stat-label">Model Status</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value" id="aiStatus">Checking...</div>
+                                            <div class="stat-label">AI Service</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value" id="dataStatus">Checking...</div>
+                                            <div class="stat-label">Data Status</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:5001';
+        let currentAnalyzer = 'lightweight';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSystemStatus();
+            updateAnalyzerDisplay();
+        });
+
+        // Switch AI Analyzer
+        async function switchAnalyzer(type) {
+            try {
+                const response = await fetch(`${API_BASE}/ai/config`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ analyzer_type: type })
+                });
+                
+                if (response.ok) {
+                    currentAnalyzer = type;
+                    updateAnalyzerDisplay();
+                    showAlert('success', `Switched to ${type} analyzer`);
+                } else {
+                    showAlert('error', 'Failed to switch analyzer');
+                }
+            } catch (error) {
+                showAlert('error', 'Error switching analyzer');
+            }
+        }
+
+        function updateAnalyzerDisplay() {
+            document.getElementById('currentAnalyzer').textContent = 
+                currentAnalyzer === 'lightweight' ? 'Lightweight' : 'Qwen3:8B';
+            
+            document.getElementById('lightweightBtn').classList.toggle('active', currentAnalyzer === 'lightweight');
+            document.getElementById('qwenBtn').classList.toggle('active', currentAnalyzer === 'qwen');
+        }
+
+        // QB Analysis Form
+        document.getElementById('qbAnalysisForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const qbName = document.getElementById('qbName').value;
+            
+            showLoading('qbLoading', true);
+            hideResult('qbResult');
+            
+            try {
+                const response = await fetch(`${API_BASE}/analyze/ai/qb`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ qb_name: qbName })
+                });
+                
+                const data = await response.json();
+                showLoading('qbLoading', false);
+                
+                if (response.ok) {
+                    displayQBResult(data);
+                } else {
+                    showAlert('error', data.error || 'Failed to analyze QB');
+                }
+            } catch (error) {
+                showLoading('qbLoading', false);
+                showAlert('error', 'Error connecting to API');
+            }
+        });
+
+        // QB Comparison Form
+        document.getElementById('comparisonForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const qb1 = document.getElementById('qb1Name').value;
+            const qb2 = document.getElementById('qb2Name').value;
+            const includeAI = document.getElementById('includeAI').checked;
+            
+            showLoading('comparisonLoading', true);
+            hideResult('comparisonResult');
+            
+            try {
+                const response = await fetch(`${API_BASE}/compare`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        qb1_name: qb1, 
+                        qb2_name: qb2, 
+                        include_ai: includeAI 
+                    })
+                });
+                
+                const data = await response.json();
+                showLoading('comparisonLoading', false);
+                
+                if (response.ok) {
+                    displayComparisonResult(data);
+                } else {
+                    showAlert('error', data.error || 'Failed to compare QBs');
+                }
+            } catch (error) {
+                showLoading('comparisonLoading', false);
+                showAlert('error', 'Error connecting to API');
+            }
+        });
+
+        // Strategic Analysis Form
+        document.getElementById('strategyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const qbName = document.getElementById('strategyQB').value;
+            const scenario = document.getElementById('scenario').value;
+            
+            showLoading('strategyLoading', true);
+            hideResult('strategyResult');
+            
+            try {
+                const response = await fetch(`${API_BASE}/analyze/ai/strategy`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        qb_name: qbName, 
+                        scenario: scenario 
+                    })
+                });
+                
+                const data = await response.json();
+                showLoading('strategyLoading', false);
+                
+                if (response.ok) {
+                    displayStrategyResult(data);
+                } else {
+                    showAlert('error', data.error || 'Failed to generate strategy');
+                }
+            } catch (error) {
+                showLoading('strategyLoading', false);
+                showAlert('error', 'Error connecting to API');
+            }
+        });
+
+        // Display Functions
+        function displayQBResult(data) {
+            const resultDiv = document.getElementById('qbResult');
+            const qbData = data.qb_data || data;
+            const qbName = qbData.name || data.qb_name || 'Unknown';
+            const archetype = qbData.archetype || 'Unknown';
+            const team = qbData.team || 'Unknown';
+            const gamesPlayed = qbData.player_game_count || qbData.games_played || qbData.key_stats?.games_played || 'Unknown';
+            const completionPercent = qbData.key_stats?.completion_percent || qbData.completion_percent || 'N/A';
+            const ypa = qbData.key_stats?.ypa || qbData.ypa || 'N/A';
+            const compPctDiff = qbData.key_stats?.comp_pct_diff || 'N/A';
+            const deepAccuracy = qbData.key_stats?.deep_accuracy_percent || 'N/A';
+            
+            resultDiv.innerHTML = `
+                <div class="result-card">
+                    <h5><i class="fas fa-user-circle me-2"></i>${qbName}</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Archetype:</strong> ${archetype}</p>
+                            <p><strong>Completion %:</strong> ${completionPercent}%</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Team:</strong> ${team}</p>
+                            <p><strong>Games Played:</strong> ${gamesPlayed}</p>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <p><strong>Yards Per Attempt:</strong> ${ypa}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Cluster:</strong> ${qbData.cluster || 'N/A'}</p>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <p><strong>Completion % vs Expected:</strong> ${compPctDiff}%</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Deep Accuracy:</strong> ${deepAccuracy}%</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <h6><i class="fas fa-brain me-2"></i>AI Analysis</h6>
+                    <p>${data.ai_analysis || 'No AI analysis available'}</p>
+                </div>
+            `;
+        }
+
+        function displayComparisonResult(data) {
+            const resultDiv = document.getElementById('comparisonResult');
+            const qb1Data = data.qb1 || data.qb1_data || {};
+            const qb2Data = data.qb2 || data.qb2_data || {};
+            
+            const qb1Name = qb1Data.name || data.qb1_name || 'Unknown';
+            const qb2Name = qb2Data.name || data.qb2_name || 'Unknown';
+            const qb1Archetype = qb1Data.archetype || data.qb1_archetype || 'Unknown';
+            const qb2Archetype = qb2Data.archetype || data.qb2_archetype || 'Unknown';
+            const qb1Confidence = qb1Data.confidence || data.qb1_confidence || 0;
+            const qb2Confidence = qb2Data.confidence || data.qb2_confidence || 0;
+            
+            let html = `
+                <div class="result-card">
+                    <h5><i class="fas fa-balance-scale me-2"></i>${qb1Name} vs ${qb2Name}</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>${qb1Name}</h6>
+                            <p><strong>Archetype:</strong> ${qb1Archetype}</p>
+                            <p><strong>Confidence:</strong> ${(qb1Confidence * 100).toFixed(1)}%</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>${qb2Name}</h6>
+                            <p><strong>Archetype:</strong> ${qb2Archetype}</p>
+                            <p><strong>Confidence:</strong> ${(qb2Confidence * 100).toFixed(1)}%</p>
+                        </div>
+                    </div>
+            `;
+            
+            if (data.ai_comparison) {
+                html += `
+                    <hr>
+                    <h6><i class="fas fa-brain me-2"></i>AI Comparison</h6>
+                    <p>${data.ai_comparison}</p>
+                `;
+            }
+            
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+
+        function displayStrategyResult(data) {
+            const resultDiv = document.getElementById('strategyResult');
+            const qbName = data.qb_name || data.qb_data?.name || 'Unknown';
+            const scenario = data.scenario || 'Unknown';
+            const strategicInsights = data.strategic_insights || 'No strategic insights available';
+            
+            resultDiv.innerHTML = `
+                <div class="result-card">
+                    <h5><i class="fas fa-chess me-2"></i>Strategic Analysis</h5>
+                    <p><strong>QB:</strong> ${qbName}</p>
+                    <p><strong>Scenario:</strong> ${scenario.replace(/_/g, ' ').toUpperCase()}</p>
+                    <hr>
+                    <h6><i class="fas fa-lightbulb me-2"></i>Strategic Insights</h6>
+                    <p>${strategicInsights}</p>
+                </div>
+            `;
+        }
+
+        // System Status Check
+        async function checkSystemStatus() {
+            try {
+                // Check API status
+                const apiResponse = await fetch(`${API_BASE}/health`);
+                document.getElementById('apiStatus').textContent = apiResponse.ok ? '🟢 Online' : '🔴 Offline';
+                document.getElementById('apiStatus').style.color = apiResponse.ok ? '#28a745' : '#dc3545';
+                
+                // Check model status
+                const modelResponse = await fetch(`${API_BASE}/models/status`);
+                if (modelResponse.ok) {
+                    const modelData = await modelResponse.json();
+                    document.getElementById('modelStatus').textContent = modelData.status === 'loaded' ? '🟢 Loaded' : '🟡 Loading';
+                    document.getElementById('modelStatus').style.color = modelData.status === 'loaded' ? '#28a745' : '#ffc107';
+                } else {
+                    document.getElementById('modelStatus').textContent = '🔴 Error';
+                    document.getElementById('modelStatus').style.color = '#dc3545';
+                }
+                
+                // Check AI service
+                const aiResponse = await fetch(`${API_BASE}/ai/config`);
+                if (aiResponse.ok) {
+                    const aiData = await aiResponse.json();
+                    document.getElementById('aiStatus').textContent = '🟢 Available';
+                    document.getElementById('aiStatus').style.color = '#28a745';
+                } else {
+                    document.getElementById('aiStatus').textContent = '🔴 Unavailable';
+                    document.getElementById('aiStatus').style.color = '#dc3545';
+                }
+                
+                // Check data status
+                document.getElementById('dataStatus').textContent = '🟢 Available';
+                document.getElementById('dataStatus').style.color = '#28a745';
+                
+            } catch (error) {
+                document.getElementById('apiStatus').textContent = '🔴 Offline';
+                document.getElementById('apiStatus').style.color = '#dc3545';
+                document.getElementById('modelStatus').textContent = '🔴 Error';
+                document.getElementById('modelStatus').style.color = '#dc3545';
+                document.getElementById('aiStatus').textContent = '🔴 Error';
+                document.getElementById('aiStatus').style.color = '#dc3545';
+                document.getElementById('dataStatus').textContent = '🔴 Error';
+                document.getElementById('dataStatus').style.color = '#dc3545';
+            }
+        }
+
+        // Utility Functions
+        function showLoading(elementId, show) {
+            document.getElementById(elementId).style.display = show ? 'block' : 'none';
+        }
+
+        function hideResult(elementId) {
+            document.getElementById(elementId).innerHTML = '';
+        }
+
+        function showAlert(type, message) {
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            const alertHtml = `
+                <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            // Insert at the top of the main container
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.insertAdjacentHTML('afterbegin', alertHtml);
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => alert.remove());
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

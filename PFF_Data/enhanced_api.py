@@ -3,7 +3,7 @@ Enhanced QB Archetype Prediction API
 Supports both player name lookup and stats-based prediction
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_swagger_ui import get_swaggerui_blueprint
 import pandas as pd
 import numpy as np
@@ -265,6 +265,7 @@ class EnhancedQBArchetypePredictor:
                         'team': qb_row['team_name'],
                         'archetype': qb_row['archetype_name'],
                         'cluster': int(qb_row['hierarchical_cluster']),
+                        'player_game_count': int(stats_row.get('player_game_count', 0)),
                         'key_stats': {
                             'accuracy_percent': float(stats_row.get('accuracy_percent', 0)),
                             'completion_percent': float(stats_row.get('completion_percent', 0)),
@@ -284,7 +285,11 @@ class EnhancedQBArchetypePredictor:
                             'designed_run_rate': float(stats_row.get('designed_run_rate', 0)),
                             'ypa_rushing': float(stats_row.get('ypa_rushing', 0)),
                             'breakaway_percent': float(stats_row.get('breakaway_percent', 0)),
-                            'qb_rush_attempt_rate': float(stats_row.get('qb_rush_attempt_rate', 0))
+                            'qb_rush_attempt_rate': float(stats_row.get('qb_rush_attempt_rate', 0)),
+                            'comp_pct_diff': float(stats_row.get('comp_pct_diff', 0)),
+                            'ypa_diff': float(stats_row.get('ypa_diff', 0)),
+                            'deep_accuracy_percent': float(stats_row.get('deep_accuracy_percent', 0)),
+                            'deep_twp_rate': float(stats_row.get('deep_twp_rate', 0))
                         }
                     }
         except Exception as e:
@@ -296,6 +301,7 @@ class EnhancedQBArchetypePredictor:
             'team': qb_row['team_name'],
             'archetype': qb_row['archetype_name'],
             'cluster': int(qb_row['hierarchical_cluster']),
+            'player_game_count': int(qb_row.get('player_game_count', 0)),
             'key_stats': {}
         }
     
@@ -1831,6 +1837,25 @@ def analyze_strategy_ai():
         logger.error(f"AI strategy analysis error: {e}")
         logger.error(traceback.format_exc())
         return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/frontend')
+def index():
+    """Serve the main frontend interface."""
+    return render_template('index.html')
+
+@app.route('/models/status')
+def models_status():
+    """Check the status of loaded models."""
+    try:
+        available_models = predictor.get_available_models()
+        status = 'loaded' if available_models else 'not_loaded'
+        return jsonify({
+            'status': status,
+            'available_models': available_models,
+            'player_data_loaded': predictor.player_data is not None
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
 
 if __name__ == '__main__':
     logger.info("Starting Enhanced QB Archetype Prediction API...")
