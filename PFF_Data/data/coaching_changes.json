@@ -1,0 +1,22 @@
+{
+    "TEXAS TECH": {
+        "target_archetype": "Mobile Pocket Passer",
+        "notes": "New OC Mack Leftwich runs Veer-and-Shoot. Prioritizing mobile pocket passer profile (Brendan Sorsby)."
+    },
+    "OKLA STATE": {
+        "target_archetype": "Pocket Managers",
+        "notes": "New HC Eric Morris is a Mike Leach disciple. Pure Air Raid system requires Pocket Managers."
+    },
+    "MISSISSIPPI": {
+        "target_archetype": "Pocket Managers",
+        "notes": "Lane Kiffin's offense typically favors high-processing Pocket Managers."
+    },
+    "INDIANA": {
+        "target_archetype": "Pocket Managers",
+        "notes": "Curt Cignetti / Mike Shanahan offense. Keeping consistent with previous year."
+    },
+    "BAYLOR": {
+        "target_archetype": "Scrambling Survivors",
+        "notes": "Dave Aranda / Spavital."
+    }
+}

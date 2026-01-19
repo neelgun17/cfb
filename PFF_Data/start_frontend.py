@@ -28,7 +28,7 @@ def main():
     
     print("✅ Starting Flask API with frontend...")
     print("🌐 Frontend will be available at: http://localhost:5001/frontend")
-    print("📚 API Documentation: http://localhost:5001/swagger")
+    print("📚 API Documentation: ahttp://localhost:5001/swagger")
     print("=" * 50)
     print("Press Ctrl+C to stop the server")
     print()

@@ -287,9 +287,13 @@ class QBClustering:
         logger.info("Saving player assignments...")
         
         try:
-            # Select key columns for output
-            output_columns = ['player', 'player_id', 'team_name', 'hierarchical_cluster', 'archetype_name']
-            output_df = self.df_filtered[output_columns].copy()
+            # Select key columns for output (including usage/grade stats for system fit analysis)
+            output_columns = ['player', 'player_id', 'team_name', 'hierarchical_cluster', 'archetype_name', 
+                              'dropbacks', 'attempts', 'grades_offense', 'grades_pass']
+            
+            # Ensure columns exist before selecting
+            valid_cols = [c for c in output_columns if c in self.df_filtered.columns]
+            output_df = self.df_filtered[valid_cols].copy()
             
             # Save to CSV
             output_df.to_csv(self.analysis_files['player_assignments'], index=False)

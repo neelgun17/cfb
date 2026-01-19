@@ -1,0 +1,33 @@
+# Add players here to exclude them from Transfer Portal matches (e.g. declared for Draft)
+# One name per line. Usage: Exact match.
+Cam Ward
+Shedeur Sanders
+Jaxson Dart
+Kyle McCord
+Quinn Ewers
+Jalen Milroe
+Carson Beck
+Dillon Gabriel
+Will Howard
+Riley Leonard
+Cameron Rising
+DJ Uiagalelei
+Tyler Van Dyke
+Graham Mertz
+Kurtis Rourke
+Will Rogers
+Travis Hunter
+Tetairoa McMillan
+Luther Burden III
+Ashton Jeanty
+Ollie Gordon II
+TreVeyon Henderson
+Quinshon Judkins
+Emeka Egbuka
+Isaiah Bond
+Ty Simpson
+Dante Moore
+Fernando Mendoza
+Diego Pavia
+Haynes King
+Behren Morton

@@ -10,9 +10,9 @@ from pathlib import Path
 PROJECT_ROOT = Path("/Users/neelgundlapally/Documents/Projects/cfb/PFF_Data")
 
 # --- Year Configuration ---
-YEARS = [2019, 2024]  # Add new years here
+YEARS = [2019, 2024, 2025]  # Add new years here
 # Global configuration
-CURRENT_YEAR = 2024
+CURRENT_YEAR = 2025
 
 # AI Analyzer Configuration
 # Options: "lightweight" (fast, rule-based) or "qwen" (detailed, LLM-based)

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Brendan Sorsby",
+        "from": "Cincinnati",
+        "to": "Texas Tech"
+    },
+    {
+        "name": "Drew Mestemaker",
+        "from": "North Texas",
+        "to": "Oklahoma State"
+    },
+    {
+        "name": "DJ Lagway",
+        "from": "Florida",
+        "to": "Baylor"
+    },
+    {
+        "name": "Byrum Brown",
+        "from": "South Florida",
+        "to": "Auburn"
+    },
+    {
+        "name": "Rocco Becht",
+        "from": "Iowa State",
+        "to": "Penn State"
+    },
+    {
+        "name": "Josh Hoover",
+        "from": "TCU",
+        "to": "Indiana"
+    }
+]
